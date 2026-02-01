@@ -22,7 +22,7 @@ if (isset($_POST['install'])) {
 define('BCB_API_URL', 'https://app.banglachatbot.com/api');
 define('BCB_API_KEY', '$bcb_api_key');
 
-define('BKASH_BASE_URL', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized/checkout');
+define('BKASH_BASE_URL', '$bkash_url');
 define('BKASH_APP_KEY', '$bkash_app_key');
 define('BKASH_APP_SECRET', '$bkash_app_secret');
 define('BKASH_USERNAME', '$bkash_username');
