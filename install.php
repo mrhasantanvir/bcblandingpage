@@ -6,13 +6,13 @@
 $config_file = 'config.php';
 
 if (isset($_POST['install'])) {
-    $bcb_api_key = $_POST['bcb_api_key'];
-    $bkash_app_key = $_POST['bkash_app_key'];
-    $bkash_app_secret = $_POST['bkash_app_secret'];
-    $bkash_username = $_POST['bkash_username'];
-    $bkash_password = $_POST['bkash_password'];
-    $bkash_url = $_POST['bkash_url'];
-    $site_url = rtrim($_POST['site_url'], '/');
+    $bcb_api_key = trim($_POST['bcb_api_key']);
+    $bkash_app_key = trim($_POST['bkash_app_key']);
+    $bkash_app_secret = trim($_POST['bkash_app_secret']);
+    $bkash_username = trim($_POST['bkash_username']);
+    $bkash_password = trim($_POST['bkash_password']);
+    $bkash_url = trim($_POST['bkash_url']);
+    $site_url = rtrim(trim($_POST['site_url']), '/');
 
     $config_content = "<?php
 /**

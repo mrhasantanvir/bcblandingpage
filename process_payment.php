@@ -51,7 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "bKash Create Payment Failed: " . ($paymentResponse['statusMessage'] ?? 'Unknown Error');
         }
     } else {
-        echo "bKash Token Grant Failed: " . ($tokenResponse['statusMessage'] ?? 'Check your credentials');
+        echo "bKash Token Grant Failed: ";
+        echo "<pre>" . print_r($tokenResponse, true) . "</pre>";
+        echo "Check your credentials in config.php. Also ensure you are using 'Tokenized Checkout' credentials, not 'PGW' credentials.";
     }
 } else {
     header("Location: index.php");
