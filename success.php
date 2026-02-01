@@ -1,6 +1,5 @@
 <?php
-session_start(); // Note: session_destroy() removed to allow success.php to access user_data for auto-login
-$userData = $_SESSION['user_data'] ?? null;
+require_once 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -8,101 +7,74 @@ $userData = $_SESSION['user_data'] ?? null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>পেমেন্ট সফল - Bangla Chatbot</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>পেমেন্ট সফল - বাংলা চ্যাটবট</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font (Hind Siliguri for Bangla) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
-        .success-card {
-            text-align: center;
-            padding: 60px 40px;
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f3f4f6;
         }
 
-        .icon {
-            font-size: 80px;
-            color: #00ff88;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, #00ff88, #00b4d8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            color: #ccc;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .btn-login {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--primary);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
-        }
-
-        .countdown {
-            font-size: 0.9rem;
-            color: #888;
-            margin-top: 20px;
+        .gradient-bg {
+            background: linear-gradient(135deg, #0062cc 0%, #007bff 100%);
         }
     </style>
 </head>
 
-<body>
-    <div class="bg-glow"></div>
-    <div class="container">
-        <div class="glass-card success-card" style="margin-top: 100px;">
-            <div class="icon">✓</div>
-            <h1>অভিনন্দন! পেমেন্ট সফল হয়েছে</h1>
-            <p>আপনার অ্যাকাউন্টটি সক্রিয় করা হয়েছে। আপনাকে ৫ সেকেন্ডের মধ্যে সরাসরি ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে...</p>
+<body class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 
-            <?php if ($userData): ?>
-                <form id="autoLoginForm" action="https://app.banglachatbot.com/home/login_page" method="POST">
-                    <input type="hidden" name="email" value="<?php echo htmlspecialchars($userData['email']); ?>">
-                    <input type="hidden" name="password" value="<?php echo htmlspecialchars($userData['password']); ?>">
-                    <button type="submit" class="btn-login">সরাসরি ড্যাশবোর্ডে যান</button>
-                </form>
-            <?php else: ?>
-                <a href="https://app.banglachatbot.com/home/login_page" class="btn-login">সরাসরি লগইন করুন</a>
-            <?php endif; ?>
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <!-- Main Card -->
+        <div class="bg-white py-12 px-6 shadow-2xl sm:rounded-lg sm:px-10 border-t-4 border-green-500 text-center">
 
-            <div class="countdown">রিডাইরেক্ট হতে বাকি: <span id="seconds">5</span> সেকেন্ড</div>
+            <!-- Success Icon -->
+            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
+                <i class="fa-solid fa-check text-4xl text-green-600"></i>
+            </div>
+
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-4">
+                অভিনন্দন! ধণ্যবাদ
+            </h2>
+
+            <div class="bg-green-50 border border-green-100 rounded-lg p-6 mb-8">
+                <p class="text-lg text-green-800 font-medium leading-relaxed">
+                    আপনার একাউন্টটি সফলভাবে সক্রিয় করা হয়েছে।
+                </p>
+                <p class="mt-4 text-gray-700">
+                    অনুগ্রহ করে সাইন ইন পেইজে গিয়ে আপনার ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন।
+                </p>
+            </div>
+
+            <!-- Login Button -->
+            <div class="space-y-4">
+                <a href="https://app.banglachatbot.com/home/login_page"
+                    class="w-full flex justify-center py-4 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-white gradient-bg hover:bg-blue-700 transition duration-150">
+                    লগইন পেইজে যান <i class="fa-solid fa-arrow-right ml-2 mt-1"></i>
+                </a>
+
+                <a href="https://wa.me/8801707676797" target="_blank"
+                    class="w-full flex justify-center py-3 px-4 border border-green-200 rounded-md shadow-sm text-base font-bold text-green-700 bg-white hover:bg-green-50 transition duration-150">
+                    <i class="fa-brands fa-whatsapp mr-2 text-xl"></i> হোয়াটসঅ্যাপে যোগাযোগ করুন
+                </a>
+            </div>
+
+            <p class="mt-8 text-sm text-gray-500">
+                কোনো সমস্যা হলে আমাদের সাপোর্টে যোগাযোগ করতে দ্বিধা করবেন না।
+            </p>
         </div>
+
+        <p class="text-center text-gray-500 text-xs mt-8">
+            &copy; <?php echo date('Y'); ?> বাংলা চ্যাটবট। সর্বস্বত্ব সংরক্ষিত।
+        </p>
     </div>
 
-    <script>
-        let seconds = 5;
-        const secondsEl = document.getElementById('seconds');
-        const autoLoginForm = document.getElementById('autoLoginForm');
-
-        const interval = setInterval(() => {
-            seconds--;
-            if (secondsEl) secondsEl.innerText = seconds;
-            if (seconds <= 0) {
-                clearInterval(interval);
-                if (autoLoginForm) {
-                    autoLoginForm.submit();
-                } else {
-                    window.location.href = "https://app.banglachatbot.com/home/login_page";
-                }
-            }
-        }, 1000);
-    </script>
 </body>
 
 </html>

@@ -35,6 +35,8 @@ if ($status == 'success') {
 
                 if (isset($createResponse['status']) && $createResponse['status'] == 'success') {
                     // Registration Successful
+                    // Clear Session
+                    session_destroy();
                     header("Location: success.php");
                     exit();
                 } else {
