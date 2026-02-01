@@ -35,10 +35,15 @@ if ($status == 'success') {
 
                 if (isset($createResponse['status']) && $createResponse['status'] == 'success') {
                     // Registration Successful
-                    // Send Welcome Email
-                    require_once 'includes/email_handler.php';
-                    $emailHandler = new EmailHandler();
-                    $emailHandler->sendWelcomeEmail($userData['email'], $userData['name'], $userData['password']);
+                    // Send Welcome Email (Safely)
+                    $email_handler_path = 'includes/email_handler.php';
+                    if (file_exists($email_handler_path)) {
+                        require_once $email_handler_path;
+                        if (class_exists('EmailHandler')) {
+                            $emailHandler = new EmailHandler();
+                            $emailHandler->sendWelcomeEmail($userData['email'], $userData['name'], $userData['password']);
+                        }
+                    }
 
                     // Clear Session
                     session_destroy();

@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../config.php';
-require_once __DIR__ . '/../vendor/autoload.php';
+
+// Safe check for PHPMailer
+$autoload_path = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoload_path)) {
+    require_once $autoload_path;
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -9,6 +14,12 @@ class EmailHandler
 {
     public function sendWelcomeEmail($userEmail, $userName, $password)
     {
+        // Prevent 500 if class doesn't exist (because composer install wasn't run)
+        if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
+            error_log("PHPMailer not found. Skipping email.");
+            return false;
+        }
+
         $mail = new PHPMailer(true);
 
         try {

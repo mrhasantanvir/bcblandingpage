@@ -7,193 +7,276 @@ require_once 'config.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>স্পেশাল অফার - বাংলা চ্যাটবট</title>
-    <!-- Tailwind CSS -->
+    <title>Bangla Chatbot - আপনার ব্যবসার বিশ্বস্ত পার্টনার</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font (Hind Siliguri for Bangla) -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-
     <style>
+        :root {
+            --primary: #006aff;
+            --secondary: #00d2ff;
+            --dark: #0a0f1d;
+        }
+
         body {
             font-family: 'Hind Siliguri', sans-serif;
-            background-color: #f3f4f6;
+            background-color: var(--dark);
+            color: #fff;
+            scroll-behavior: smooth;
         }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, #0062cc 0%, #007bff 100%);
+        .glass-nav {
+            background: rgba(10, 15, 29, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Smooth Fade In Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
+        .hero-bg {
+            background: radial-gradient(circle at top right, rgba(0, 106, 255, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(0, 210, 255, 0.1), transparent 40%);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 106, 255, 0.2);
+            outline: none;
+        }
+
+        .btn-premium {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: all 0.3s;
+        }
+
+        .btn-premium:hover {
+            box-shadow: 0 5px 20px rgba(0, 106, 255, 0.4);
+            transform: scale(1.02);
         }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<body class="hero-bg min-h-screen">
 
-    <div class="sm:mx-auto sm:w-full sm:max-w-md animate-fade-in">
-        <!-- Logo Area -->
-        <div class="text-center mb-6">
-            <img class="mx-auto h-16 w-auto" src="https://app.banglachatbot.com/assets/img/logo.png"
-                alt="Bangla Chatbot">
-            <h2 class="mt-4 text-3xl font-extrabold text-gray-900">
-                অ্যাকাউন্ট তৈরি করুন
-            </h2>
-            <p class="mt-2 text-sm text-gray-600">
-                আপনার ব্যবসার অটোমেশন শুরু হোক এখান থেকেই
-            </p>
-        </div>
-
-        <!-- Main Card -->
-        <div
-            class="bg-white py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10 border-t-4 border-blue-600 relative overflow-hidden">
-
-            <!-- Offer Badge -->
-            <div
-                class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg shadow-sm">
-                সীমিত সময়ের অফার
+    <!-- Navigation -->
+    <nav class="glass-nav fixed top-0 w-full z-50 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://app.banglachatbot.com/assets/img/logo.png" alt="Logo" class="h-10">
+                <span class="text-xl font-bold tracking-tight">Bangla <span class="gradient-text">Chatbot</span></span>
             </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#features" class="hover:text-blue-400 transition">ফিচারসমূহ</a>
+                <a href="#why-us" class="hover:text-blue-400 transition">কেন আমাদের নির্বাচন করবেন?</a>
+                <a href="#pricing" class="hover:text-blue-400 transition">প্রাইসিং</a>
+            </div>
+            <a href="#order"
+                class="btn-premium px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider">অফারটি নিন</a>
+        </div>
+    </nav>
 
-            <!-- Package Info Section -->
-            <div class="bg-blue-50 border border-blue-100 rounded-lg p-5 mb-6 text-center">
-                <h3 class="text-lg font-semibold text-blue-800">প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন</h3>
-                <div class="mt-2 flex justify-center items-baseline">
-                    <span
-                        class="text-4xl font-extrabold text-blue-600">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
-                    <?php if (OFFER_PRICE > 1): ?>
-                        <span class="ml-1 text-xl font-medium text-gray-500 line-through">৳৫০০০</span>
-                    <?php endif; ?>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="container mx-auto text-center max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                আপনার ব্যবসাকে অটোমেট করুন <br>
+                <span class="gradient-text">এআই চ্যাটবট প্রযুক্তির</span> মাধ্যমে
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                ফেসবুক, ইনস্টাগ্রাম এবং হোয়াটসঅ্যাপে গ্রাহকের মেসেজের রিপ্লাই দিন নিমিষেই। বাড়ান আপনার ব্র্যান্ড ভ্যালু
+                এবং সেলস।
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#order" class="btn-premium px-10 py-4 rounded-xl font-bold text-lg w-full sm:w-auto">
+                    আপনার যাত্রা শুরু করুন
+                </a>
+                <a href="#features"
+                    class="px-10 py-4 rounded-xl border border-white/10 font-bold text-lg hover:bg-white/5 transition w-full sm:w-auto">
+                    আরো জানুন
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 bg-black/20">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">আমাদের স্পেশাল <span class="gradient-text">ফিচারসমূহ</span></h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card p-8 rounded-2xl">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-bolt text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">অটো-রিপ্লাই সিস্টেম</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        কমেন্টে বা ইনবক্সে গ্রাহকের কমন সব প্রশ্নের উত্তর দিবে চ্যাটবট। আপনাকে আর ২৪ ঘণ্টা অনলাইনে থাকতে
+                        হবে না।
+                    </p>
                 </div>
-                <ul class="mt-4 text-sm text-left space-y-2 text-gray-600 px-4">
-                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>আনলিমিটেড ফেসবুক পেজ</li>
-                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>আনলিমিটেড সাবস্ক্রাইবার</li>
-                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>২৪/৭ সাপোর্ট</li>
+                <div class="feature-card p-8 rounded-2xl">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-comments text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">মাল্টি-প্ল্যাটফর্ম সাপোর্ট</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        ফেসবুক পেজ, ইনস্টাগ্রাম এবং হোয়াটসঅ্যাপ—সব কিছু ম্যানেজ করুন একটি মাত্র ড্যাশবোর্ড থেকে।
+                    </p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl">
+                    <div class="w-14 h-14 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-robot text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">এআই টেকনোলজি</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        গ্রাহকের মুড এবং ভাষা বুঝে যথাযথ উত্তর দিতে সক্ষম আমাদের উন্নত এআই ভিত্তিক ইন্টেলিজেন্ট চ্যাটবট।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="py-20 px-6">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1">
+                <h2 class="text-3xl font-bold mb-6 italic leading-snug">কেন আপনার ব্যবসার জন্য <br><span
+                        class="gradient-text text-4xl">Bangla Chatbot</span> প্রয়োজন?</h2>
+                <ul class="space-y-6">
+                    <li class="flex items-start space-x-4">
+                        <span class="bg-green-500/20 p-1 rounded-full"><i
+                                class="fa-solid fa-check text-green-500"></i></span>
+                        <div>
+                            <p class="font-bold mb-1">১০০% কাস্টমার এনগেজমেন্ট</p>
+                            <p class="text-gray-400 text-sm">কেউ মেসেজ দিলেই সাথে সাথে উত্তর পাবেন, যা আপনার সেলস বাড়াতে
+                                সাহায্য করবে।</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-4">
+                        <span class="bg-green-500/20 p-1 rounded-full"><i
+                                class="fa-solid fa-check text-green-500"></i></span>
+                        <div>
+                            <p class="font-bold mb-1">অপারেটিং কস্ট কমানো</p>
+                            <p class="text-gray-400 text-sm">একাধিক কাস্টমার সাপোর্ট স্টাফ রাখার পরিবর্তে একাই সব
+                                ম্যানেজ করবে এই রোবট।</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-4">
+                        <span class="bg-green-500/20 p-1 rounded-full"><i
+                                class="fa-solid fa-check text-green-500"></i></span>
+                        <div>
+                            <p class="font-bold mb-1">২৪/৭ কাস্টমার সার্ভিস</p>
+                            <p class="text-gray-400 text-sm">আপনি যখন ঘুমাচ্ছেন, তখনও আপনার ইনবক্সে কাজ চলবে। কোনো লিড
+                                মিস হবে না।</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
-
-            <!-- Registration Form -->
-            <form id="paymentForm" class="space-y-5" action="process_payment.php" method="POST">
-
-                <!-- Name -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">পুরো নাম</label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fa-regular fa-user text-gray-400"></i>
-                        </div>
-                        <input id="name" name="name" type="text" required
-                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border"
-                            placeholder="আপনার নাম লিখুন">
-                    </div>
-                </div>
-
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">ইমেইল এড্রেস</label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fa-regular fa-envelope text-gray-400"></i>
-                        </div>
-                        <input id="email" name="email" type="email" required
-                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border"
-                            placeholder="example@mail.com">
-                    </div>
-                    <div id="email-warning" style="color: #ff4d4d; font-size: 0.8rem; margin-top: 5px; display: none;">
-                    </div>
-                </div>
-
-                <!-- Password -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">পাসওয়ার্ড (নতুন অ্যাকাউন্টের
-                        জন্য)</label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fa-solid fa-lock text-gray-400"></i>
-                        </div>
-                        <input id="password" name="password" type="password" required
-                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border"
-                            placeholder="গোপন পাসওয়ার্ড দিন">
-                    </div>
-                </div>
-
-                <!-- Mobile -->
-                <div>
-                    <label for="mobile" class="block text-sm font-medium text-gray-700">মোবাইল নম্বর</label>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fa-solid fa-phone text-gray-400"></i>
-                        </div>
-                        <input id="mobile" name="mobile" type="tel" required
-                            class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border"
-                            placeholder="01XXXXXXXXX">
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <div>
-                    <button type="submit"
-                        class="btn-payment w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-bold text-white gradient-bg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
-                        পেমেন্ট করতে এগিয়ে যান <i class="fa-solid fa-arrow-right ml-2 mt-1"></i>
-                    </button>
-                    <p class="text-xs text-center text-gray-500 mt-2">বিকাশ পেমেন্ট গেটওয়েতে রিডাইরেক্ট করা হবে</p>
-                </div>
-            </form>
-
-            <div class="mt-6">
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">
-                            পেমেন্ট পার্টনার
-                        </span>
-                    </div>
-                </div>
-                <div class="mt-4 grid grid-cols-3 gap-3 opacity-60 grayscale hover:grayscale-0 transition duration-300">
-                    <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-pink-600 font-bold">
-                        bKash</div>
+            <div class="flex-1">
+                <div class="bg-blue-600/5 p-12 rounded-[40px] border border-white/5 relative overflow-hidden group">
                     <div
-                        class="flex items-center justify-center p-2 border rounded bg-gray-50 text-orange-600 font-bold">
-                        Nagad</div>
-                    <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-blue-800 font-bold">
-                        VISA</div>
+                        class="absolute -top-24 -right-24 w-60 h-60 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition duration-1000">
+                    </div>
+                    <img src="https://app.banglachatbot.com/assets/img/logo.png" alt="Bot Icon"
+                        class="w-full max-w-[250px] mx-auto filter drop-shadow-[0_0_50px_rgba(0,106,255,0.4)]">
                 </div>
             </div>
         </div>
+    </section>
 
-        <p class="text-center text-gray-500 text-xs mt-8">
-            &copy; <?php echo date('Y'); ?> বাংলা চ্যাটবট। সর্বস্বত্ব সংরক্ষিত।
-        </p>
-    </div>
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-6 bg-black/30">
+        <div class="container mx-auto max-w-xl text-center">
+            <div class="bg-white/5 border-2 border-primary/30 p-10 rounded-3xl relative">
+                <div
+                    class="absolute -top-5 left-1/2 -translate-x-1/2 bg-primary px-6 py-2 rounded-full text-xs font-bold uppercase">
+                    লিমিটেড অফার</div>
+                <h3 class="text-2xl font-bold mb-2">মেগা সাবস্ক্রিপশন (১ বছর)</h3>
+                <div class="my-8">
+                    <span class="text-6xl font-black gradient-text">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
+                    <span class="text-gray-500 line-through ml-2">৳৫,০০০</span>
+                </div>
+                <ul class="text-left space-y-4 mb-10 text-gray-300">
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-blue-400"></i>
+                        <span>আনলিমিটেড ফেসবুক পেজ</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-blue-400"></i>
+                        <span>আনলিমিটেড সাবস্ক্রাইবার</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-blue-400"></i>
+                        <span>সবগুলো প্রিমিয়াম ড্রপ-ইন ফিচার</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-circle-check text-blue-400"></i>
+                        <span>লাইফটাইম আপডেট এবং সাপোর্ট</span></li>
+                </ul>
+                <div id="order" class="bg-white text-dark rounded-3xl p-8 text-left shadow-2xl">
+                    <h4 class="text-lg font-bold text-dark mb-6">রেজিস্ট্রেশন এবং পেমেন্ট</h4>
+                    <form id="paymentForm" action="process_payment.php" method="POST" class="space-y-4">
+                        <input type="text" name="name" required placeholder="আপনার পুরো নাম"
+                            class="form-input w-full p-4 rounded-xl text-dark">
+                        <input type="email" id="email" name="email" required placeholder="আপনার ইমেইল এড্রেস"
+                            class="form-input w-full p-4 rounded-xl text-dark">
+                        <div id="email-warning"
+                            style="color: #ff4d4d; font-size: 0.8rem; margin-top: -10px; display: none;"></div>
+                        <input type="password" name="password" required placeholder="গোপন পাসওয়ার্ড দিন"
+                            class="form-input w-full p-4 rounded-xl text-dark">
+                        <input type="tel" name="mobile" required placeholder="মোবাইল নম্বর"
+                            class="form-input w-full p-4 rounded-xl text-dark">
+                        <button type="submit"
+                            class="btn-payment btn-premium w-full py-5 rounded-xl text-white font-bold text-lg">
+                            বিকাশ দিয়ে পে করুন <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Logic Script -->
+    <!-- Support Footer -->
+    <footer class="py-10 px-6 border-t border-white/5 text-center">
+        <p class="text-gray-500 mb-6">কোনো জিজ্ঞাসা আছে?</p>
+        <a href="https://wa.me/8801707676797"
+            class="inline-flex items-center space-x-3 bg-green-500/10 text-green-400 px-8 py-3 rounded-full hover:bg-green-500/20 transition font-bold">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+            <span>আমাদের হোয়াটসঅ্যাপে মেসেজ দিন</span>
+        </a>
+        <div class="mt-12 text-gray-600 text-xs">
+            © <?php echo date('Y'); ?> Bangla Chatbot. All rights reserved.
+        </div>
+    </footer>
+
     <script>
         const emailInput = document.getElementById('email');
         const emailWarning = document.getElementById('email-warning');
-        const submitBtn = document.querySelector('.btn-payment');
+        const submitBtn = document.querySelector('.btn-payment') ;
         let timeout = null;
 
-        emailInput.addEventListener('input', function () {
+        emailInput.addEventListener('input', function() {
             const email = this.value;
             emailWarning.style.display = 'none';
-            emailInput.style.borderColor = 'rgba(209, 213, 219, 1)';
             submitBtn.disabled = false;
             submitBtn.style.opacity = '1';
 
@@ -202,8 +285,8 @@ require_once 'config.php';
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 emailWarning.style.display = 'block';
-                emailWarning.style.color = '#aaa';
                 emailWarning.innerText = 'যাচাই করা হচ্ছে...';
+                emailWarning.style.color = '#888';
 
                 fetch(`check_email.php?email=${encodeURIComponent(email)}`)
                     .then(response => response.json())
@@ -211,14 +294,13 @@ require_once 'config.php';
                         if (data.status === 'exists') {
                             emailWarning.innerText = data.message;
                             emailWarning.style.color = '#ff4d4d';
-                            emailInput.style.borderColor = '#ff4d4d';
                             submitBtn.disabled = true;
                             submitBtn.style.opacity = '0.5';
                         } else {
                             emailWarning.style.display = 'none';
                         }
                     })
-                    .catch(err => console.error('Email check failed', err));
+                    .catch(err => console.error(err));
             }, 800);
         });
 
@@ -228,7 +310,6 @@ require_once 'config.php';
             btn.style.opacity = '0.7';
         });
     </script>
-
 </body>
 
 </html>
