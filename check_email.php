@@ -16,7 +16,7 @@ $userInfo = $bcb->getUserInfo($email);
 
 // Adjust this based on actual API response structure
 if (isset($userInfo['status']) && $userInfo['status'] == 'success' && !empty($userInfo['data'])) {
-    echo json_encode(['status' => 'exists', 'message' => 'এই ইমেইল দিয়ে অলরেডি একাউন্ট আছে। দয়া করে অন্য ইমেইল ব্যবহার করুন।']);
+    echo json_encode(['status' => 'exists', 'message' => 'Email already exists! অনুগ্রহ করে পুনরায় চেষ্টা করুন অথবা আমাদের সাপোর্টে যোগাযোগ করুন।']);
 } else {
     echo json_encode(['status' => 'available', 'message' => 'Email is available']);
 }

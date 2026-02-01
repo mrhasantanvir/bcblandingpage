@@ -101,7 +101,10 @@ require_once 'config.php';
 
         emailInput.addEventListener('blur', function() {
             const email = this.value;
-            if (email.length < 5) return;
+            if (email.length < 5) {
+                emailWarning.style.display = 'none';
+                return;
+            }
 
             emailWarning.style.display = 'block';
             emailWarning.style.color = '#aaa';
@@ -113,18 +116,31 @@ require_once 'config.php';
                     if (data.status === 'exists') {
                         emailWarning.innerText = data.message;
                         emailWarning.style.color = '#ff4d4d';
+                        emailInput.style.borderColor = '#ff4d4d';
                         submitBtn.disabled = true;
                         submitBtn.style.opacity = '0.5';
+                        submitBtn.style.cursor = 'not-allowed';
                     } else {
                         emailWarning.style.display = 'none';
+                        emailInput.style.borderColor = 'rgba(255,255,255,0.1)';
                         submitBtn.disabled = false;
                         submitBtn.style.opacity = '1';
+                        submitBtn.style.cursor = 'pointer';
                     }
                 })
                 .catch(err => {
                     console.error('Email check failed', err);
                     emailWarning.style.display = 'none';
                 });
+        });
+
+        // Clear warning on input start
+        emailInput.addEventListener('input', function() {
+            emailWarning.style.display = 'none';
+            emailInput.style.borderColor = 'rgba(255,255,255,0.1)';
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
         });
 
         document.getElementById('paymentForm').addEventListener('submit', function (e) {
