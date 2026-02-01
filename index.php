@@ -3,14 +3,17 @@ require_once 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bangla Chatbot | Next-Gen AI Automation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #030014;
@@ -20,34 +23,50 @@ require_once 'config.php';
 
         body {
             font-family: 'Outfit', 'Hind Siliguri', sans-serif;
-            background-color: var(--bg-color);
+            background-color: #030014;
+            /* Forced dark background */
             color: #ffffff;
+            margin: 0;
             overflow-x: hidden;
-            background: 
-                radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
         }
 
-        /* Moving background blobs for that futuristic ambient look */
-        .blob {
+        /* Ambient Background with Fixed Base Color */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #030014;
+            z-index: -2;
+        }
+
+        .ambient-glow {
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(14, 165, 233, 0.2));
-            filter: blur(80px);
-            border-radius: 50%;
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+            top: -20%;
+            left: -10%;
             z-index: -1;
-            animation: move 20s infinite alternate;
+            filter: blur(60px);
         }
 
-        @keyframes move {
-            from { transform: translate(-10%, -10%); }
-            to { transform: translate(10%, 10%); }
+        .ambient-glow-2 {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            bottom: -10%;
+            right: -10%;
+            z-index: -1;
+            filter: blur(60px);
         }
 
         .hero-title {
-            letter-spacing: -0.02em;
-            background: linear-gradient(to bottom, #ffffff 50%, rgba(255,255,255,0.5) 100%);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            background: linear-gradient(to bottom, #ffffff 60%, rgba(255, 255, 255, 0.4) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -55,21 +74,23 @@ require_once 'config.php';
         .pill-btn {
             background: #ffffff;
             color: #000;
-            padding: 12px 28px;
+            padding: 16px 36px;
             border-radius: 9999px;
-            font-weight: 700;
-            transition: all 0.3s ease;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-flex;
             align-items: center;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
         .pill-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
         }
 
-        /* Orbiting elements */
-        .orbit-wrap {
+        /* Orbiting Visualization */
+        .orbit-container {
             position: relative;
             width: 500px;
             height: 500px;
@@ -80,170 +101,282 @@ require_once 'config.php';
 
         .orbit-ring {
             position: absolute;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 50%;
         }
 
-        .ring-1 { width: 180px; height: 180px; }
-        .ring-2 { width: 340px; height: 340px; }
-        .ring-3 { width: 500px; height: 500px; }
+        .ring-1 {
+            width: 160px;
+            height: 160px;
+        }
+
+        .ring-2 {
+            width: 320px;
+            height: 320px;
+        }
+
+        .ring-3 {
+            width: 480px;
+            height: 480px;
+        }
 
         .orbit-item {
             position: absolute;
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .orbiting-1 { animation: orbit1 15s linear infinite; }
-        .orbiting-2 { animation: orbit2 25s linear infinite; }
-        .orbiting-3 { animation: orbit3 35s linear infinite; }
+        .orbit-1 {
+            animation: rotate1 20s linear infinite;
+        }
 
-        @keyframes orbit1 { from { transform: rotate(0deg) translateX(90px) rotate(0deg); } to { transform: rotate(360deg) translateX(90px) rotate(-360deg); } }
-        @keyframes orbit2 { from { transform: rotate(0deg) translateX(170px) rotate(0deg); } to { transform: rotate(360deg) translateX(170px) rotate(-360deg); } }
-        @keyframes orbit3 { from { transform: rotate(0deg) translateX(250px) rotate(0deg); } to { transform: rotate(360deg) translateX(250px) rotate(-360deg); } }
+        .orbit-2 {
+            animation: rotate2 30s linear infinite;
+        }
 
-        .stat-center {
+        .orbit-3 {
+            animation: rotate3 40s linear infinite;
+        }
+
+        @keyframes rotate1 {
+            from {
+                transform: rotate(0deg) translateX(80px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(80px) rotate(-360deg);
+            }
+        }
+
+        @keyframes rotate2 {
+            from {
+                transform: rotate(0deg) translateX(160px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(160px) rotate(-360deg);
+            }
+        }
+
+        @keyframes rotate3 {
+            from {
+                transform: rotate(0deg) translateX(240px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(240px) rotate(-360deg);
+            }
+        }
+
+        .center-text {
             text-align: center;
             z-index: 10;
         }
 
-        .glass-form {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 32px;
+        /* Glass Form Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
         }
 
-        .input-futuristic {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+        .input-dark {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #fff;
-            padding: 16px;
-            border-radius: 16px;
+            padding: 18px;
+            border-radius: 20px;
+            width: 100%;
             transition: all 0.3s;
         }
 
-        .input-futuristic:focus {
+        .input-dark:focus {
+            background: rgba(255, 255, 255, 0.06);
             border-color: var(--accent-purple);
-            background: rgba(255,255,255,0.06);
             outline: none;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+        }
+
+        .nav-link {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-purple-500/30">
 
-    <div class="blob" style="top: 10%; left: 10%;"></div>
-    <div class="blob" style="bottom: 10%; right: 10%; animation-delay: -5s;"></div>
+<body class="antialiased">
+
+    <!-- Ambient Elements -->
+    <div class="ambient-bg">
+        <div class="ambient-glow"></div>
+        <div class="ambient-glow-2"></div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
+    <nav
+        class="fixed top-0 left-0 w-full z-50 px-8 py-8 md:px-16 flex justify-between items-center transition-all duration-500">
+        <div class="flex items-center space-x-3">
             <img src="https://app.banglachatbot.com/assets/img/logo.png" alt="Logo" class="h-8">
-            <span class="text-xl font-extrabold tracking-tighter">Bangla<span class="text-purple-500">Chatbot</span></span>
+            <span class="text-xl font-black tracking-tighter uppercase italic">Bangla<span
+                    class="text-purple-500">Chatbot</span></span>
         </div>
-        <div class="hidden md:flex space-x-10 text-xs font-bold uppercase tracking-widest opacity-40">
-            <a href="#" class="hover:opacity-100 transition">Solutions</a>
-            <a href="#" class="hover:opacity-100 transition">Features</a>
-            <a href="#" class="hover:opacity-100 transition">Pricing</a>
+        <div class="hidden lg:flex items-center space-x-12">
+            <a href="#" class="nav-link">Solutions</a>
+            <a href="#" class="nav-link">Integrations</a>
+            <a href="#" class="nav-link">Pricing</a>
         </div>
-        <div class="flex items-center space-x-6">
-            <a href="https://app.banglachatbot.com/home/login_page" class="text-xs font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition">Log In</a>
-            <button onclick="document.getElementById('checkout').scrollIntoView({behavior:'smooth'})" class="text-xs font-bold uppercase tracking-widest bg-white text-black px-6 py-3 rounded-full hover:bg-slate-200 transition">Join Now</button>
+        <div class="flex items-center space-x-8">
+            <a href="https://app.banglachatbot.com/home/login_page"
+                class="nav-link !opacity-60 underline underline-offset-8">Log In</a>
+            <button onclick="document.getElementById('buy-now').scrollIntoView({behavior:'smooth'})"
+                class="bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition">Join
+                Now</button>
         </div>
     </nav>
 
-    <!-- Main Section -->
-    <main class="relative pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 min-h-screen">
-        
-        <div class="lg:w-1/2 space-y-10">
-            <h1 class="hero-title text-6xl md:text-8xl font-extrabold leading-[0.95]">
-                Simplify Your <br>
-                Service with <br>
-                Bangla Chatbot
-            </h1>
-            <p class="text-slate-400 text-lg md:text-xl max-w-lg leading-relaxed">
-                আপনার ফেসবুক পেইজের কাস্টমারদের রিপ্লাই দিন অটোমেটিক। কোনো কাস্টমার আর ফিরে যাবে না খালি হাতে। স্মার্ট অটোমেশনের যাত্রা শুরু হোক আজই।
-            </p>
-            <div class="flex items-center space-x-6">
-                <button onclick="document.getElementById('checkout').scrollIntoView({behavior:'smooth'})" class="pill-btn group">
-                    Start Project 
-                    <i class="fa-solid fa-arrow-right ml-3 text-sm transition-transform group-hover:translate-x-1"></i>
+    <!-- Hero Content -->
+    <main
+        class="relative z-10 pt-48 pb-32 px-8 md:px-16 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-24">
+
+        <div class="lg:w-1/2 space-y-12 text-center lg:text-left">
+            <div>
+                <h1 class="hero-title text-7xl md:text-[6rem] font-extrabold italic">
+                    Simplify Your <br>
+                    Service with <br>
+                    Bangla Chatbot
+                </h1>
+                <p class="mt-8 text-slate-400 text-xl font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    আপনার ফেসবুক ও মেসেঞ্জার পেইজের কাস্টমারদের রিপ্লাই দিন অটোমেটিকভাবে। স্মার্ট এআই এর মাধ্যমে ব্যবসার
+                    গতি বাড়িয়ে নিন বহুগুণ।
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
+                <button onclick="document.getElementById('buy-now').scrollIntoView({behavior:'smooth'})"
+                    class="pill-btn group">
+                    <span>Get Started</span>
+                    <i class="fa-solid fa-arrow-right ml-4 transition-transform group-hover:translate-x-1"></i>
                 </button>
-                <div class="flex items-center space-x-2 text-slate-500 font-bold uppercase text-[0.6rem] tracking-widest">
-                    <span>Verified by 500+ Businesses</span>
+                <div class="flex flex-col items-start text-left">
+                    <span class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 mb-1">Trusted
+                        Partner</span>
+                    <div class="flex items-center space-x-2 text-slate-200 font-bold">
+                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                        <span>500+ Businesses Verified</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Orbiting Visualization -->
+        <!-- Orbit Graphic -->
         <div class="lg:w-1/2 flex justify-center items-center">
-            <div class="orbit-wrap">
+            <div class="orbit-container">
                 <div class="orbit-ring ring-1"></div>
                 <div class="orbit-ring ring-2"></div>
                 <div class="orbit-ring ring-3"></div>
-                
-                <div class="stat-center">
-                    <span class="text-6xl font-extrabold">500+</span>
-                    <p class="text-[0.6rem] font-black uppercase tracking-[0.3em] text-slate-500 mt-2">Active Specialists</p>
+
+                <div class="center-text">
+                    <h3 class="text-6xl font-black italic">500+</h3>
+                    <p class="text-[0.6rem] font-black uppercase tracking-[0.4em] text-slate-500 mt-2">Active
+                        Specialists</p>
                 </div>
 
-                <!-- Animated Icons -->
-                <div class="orbit-item orbiting-1">
+                <!-- Orbiting Nodes -->
+                <div class="orbit-item orbit-1">
                     <i class="fa-solid fa-message text-purple-400"></i>
                 </div>
-                <div class="orbit-item orbiting-2" style="animation-delay: -5s;">
+                <div class="orbit-item orbit-2" style="animation-delay: -5s;">
                     <i class="fa-solid fa-robot text-blue-400"></i>
                 </div>
-                <div class="orbit-item orbiting-3" style="animation-delay: -15s;">
-                    <i class="fa-solid fa-bolt text-yellow-400"></i>
+                <div class="orbit-item orbit-3" style="animation-delay: -15s;">
+                    <i class="fa-solid fa-rocket text-pink-400"></i>
                 </div>
-                <div class="orbit-item orbiting-2" style="animation-delay: -10s;">
-                    <i class="fa-solid fa-shield-halved text-green-400"></i>
+                <div class="orbit-item orbit-2" style="animation-delay: -15s;">
+                    <i class="fa-solid fa-bolt text-yellow-500"></i>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Partners -->
-    <div class="py-12 border-y border-white/5 opacity-20">
-        <div class="max-w-7xl mx-auto px-12 flex justify-between items-center flex-wrap gap-8">
-            <span class="text-2xl font-black italic tracking-tighter">Dreamure</span>
-            <span class="text-2xl font-black italic tracking-tighter">SWITCH.WIN</span>
-            <span class="text-2xl font-black italic tracking-tighter">Sphere</span>
-            <span class="text-2xl font-black italic tracking-tighter">PinSpace</span>
-            <span class="text-2xl font-black italic tracking-tighter">Visionix</span>
+    <!-- Partner Logos (Monochrome) -->
+    <div class="py-16 border-y border-white/5 bg-white/0">
+        <div class="max-w-7xl mx-auto px-12 flex flex-wrap justify-between items-center gap-12 opacity-30">
+            <span class="text-2xl font-black tracking-tighter italic">DREAMURE</span>
+            <span class="text-2xl font-black tracking-tighter italic">SWITCH.WIN</span>
+            <span class="text-2xl font-black tracking-tighter italic">GLOWSPHERE</span>
+            <span class="text-2xl font-black tracking-tighter italic">PINSPACE</span>
+            <span class="text-2xl font-black tracking-tighter italic">VISIONIX</span>
         </div>
     </div>
 
-    <!-- Checkout Section -->
-    <section id="checkout" class="py-32 px-6 md:px-12">
-        <div class="max-w-4xl mx-auto">
-            <div class="glass-form p-10 md:p-16">
+    <!-- Pricing / Order Section -->
+    <section id="buy-now" class="py-40 px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass-card p-12 md:p-20 relative overflow-hidden">
                 <div class="text-center mb-16">
-                    <span class="text-xs font-black uppercase tracking-[0.5em] text-purple-500 mb-6 block">Pricing</span>
-                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 italic">১ বছরের স্পেশাল অফার</h2>
-                    <div class="text-7xl font-black tracking-tighter text-white mb-2">৳<?php echo number_format(OFFER_PRICE, 0); ?></div>
-                    <p class="text-slate-500 font-bold italic line-through">নিয়মিত মূল্য ৳৫,০০০</p>
+                    <h2 class="text-4xl md:text-5xl font-black italic mb-6">আপনার ব্যবসার জন্য স্পেশাল অফার</h2>
+                    <div class="flex flex-col items-center">
+                        <span
+                            class="text-8xl font-black tracking-tighter text-white">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
+                        <div class="mt-4 flex items-center space-x-4">
+                            <span class="text-slate-500 line-through text-2xl font-bold">৳৫,০০০</span>
+                            <span
+                                class="bg-purple-600 px-3 py-1 rounded-md text-xs font-black uppercase tracking-widest">Mega
+                                Sale</span>
+                        </div>
+                    </div>
                 </div>
 
-                <form id="paymentForm" action="process_payment.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <input type="text" name="name" required placeholder="Full Name" class="input-futuristic">
-                    <input type="email" id="email" name="email" required placeholder="Email Address" class="input-futuristic">
-                    <input type="password" name="password" required placeholder="Create Password" class="input-futuristic">
-                    <input type="tel" name="mobile" required placeholder="Mobile Number" class="input-futuristic">
-                    
-                    <div class="md:col-span-2">
-                        <button type="submit" class="btn-payment w-full bg-white text-black py-5 rounded-2xl font-black text-xl hover:bg-purple-500 hover:text-white transition-all">
+                <form id="paymentForm" action="process_payment.php" method="POST"
+                    class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <label class="text-[0.6rem] font-black uppercase tracking-widest text-slate-500 ml-1">Full
+                            Name</label>
+                        <input type="text" name="name" required placeholder="Hasib Chowdhury" class="input-dark">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[0.6rem] font-black uppercase tracking-widest text-slate-500 ml-1">Email
+                            Address</label>
+                        <input type="email" id="email" name="email" required placeholder="name@example.com"
+                            class="input-dark">
+                        <div id="email-warning" class="text-[0.6rem] mt-2 ml-1 hidden"></div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[0.6rem] font-black uppercase tracking-widest text-slate-500 ml-1">Account
+                            Password</label>
+                        <input type="password" name="password" required placeholder="••••••••" class="input-dark">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[0.6rem] font-black uppercase tracking-widest text-slate-500 ml-1">Mobile
+                            Number</label>
+                        <input type="tel" name="mobile" required placeholder="01XXXXXXXXX" class="input-dark">
+                    </div>
+
+                    <div class="md:col-span-2 pt-6">
+                        <button type="submit"
+                            class="btn-payment w-full bg-white text-black py-6 rounded-3xl font-black text-2xl hover:bg-slate-100 transition shadow-[0_20px_40px_rgba(255,255,255,0.1)]">
                             PAY WITH BKASH
                         </button>
+                        <p class="text-center mt-6 text-[0.6rem] font-black uppercase tracking-[0.4em] text-slate-600">
+                            Secure Payment SSL Encrypted</p>
                     </div>
                 </form>
             </div>
@@ -251,20 +384,30 @@ require_once 'config.php';
     </section>
 
     <!-- Footer -->
-    <footer class="py-20 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-12 flex flex-col items-center">
-            <div class="flex space-x-4 mb-10">
-                <a href="https://wa.me/8801707676797" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-green-500 transition">
-                    <i class="fa-brands fa-whatsapp text-xl"></i>
-                </a>
-            </div>
-            <p class="text-slate-600 text-[0.6rem] font-black uppercase tracking-[0.5em]">
-                &copy; <?php echo date('Y'); ?> Bangla Chatbot. All Rights Reserved.
-            </p>
+    <footer class="py-24 border-t border-white/5 text-center">
+        <div class="flex justify-center space-x-10 mb-12 grayscale opacity-40">
+            <img src="https://app.banglachatbot.com/assets/img/logo.png" class="h-8">
         </div>
+        <p class="text-[0.6rem] font-black uppercase tracking-[0.6em] text-slate-600">
+            &copy; <?php echo date('Y'); ?> Bangla Chatbot. The Future is Automated.
+        </p>
     </footer>
 
     <script>
+        // Smooth reveal on scroll helper
+        const reveal = () =>  {
+            const elements = document.querySelectorAll('.glass-card, .hero-title');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight - 100) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        
+        // Email check
         const emailInput = document.getElementById('email');
         const submitBtn = document.querySelector('.btn-payment');
         
@@ -290,4 +433,5 @@ require_once 'config.php';
         });
     </script>
 </body>
+
 </html>
