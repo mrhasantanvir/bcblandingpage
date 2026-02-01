@@ -51,7 +51,14 @@ require_once 'config.php';
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
         }
+
+        .countdown {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 20px;
+        }
     </style>
+    <meta http-equiv="refresh" content="5;url=https://app.banglachatbot.com/login">
 </head>
 
 <body>
@@ -60,11 +67,21 @@ require_once 'config.php';
         <div class="glass-card success-card" style="margin-top: 100px;">
             <div class="icon">✓</div>
             <h1>অভিনন্দন! পেমেন্ট সফল হয়েছে</h1>
-            <p>আপনার অ্যাকাউন্টটি সফলভাবে তৈরি এবং প্রিমিয়াম প্যাকেজ এক্টিভেট করা হয়েছে। আপনি এখন আপনার ড্যাশবোর্ডে লগইন
-                করতে পারেন।</p>
-            <a href="https://app.banglachatbot.com/login" class="btn-login">ড্যাশবোর্ড এ লগইন করুন</a>
+            <p>আপনার অ্যাকাউন্টটি সক্রিয় করা হয়েছে। আপনাকে ৫ সেকেন্ডের মধ্যে ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে...</p>
+            <a href="https://app.banglachatbot.com/login" class="btn-login">সরাসরি লগইন করুন</a>
+            <div class="countdown">রিডাইরেক্ট হতে বাকি: <span id="seconds">5</span> সেকেন্ড</div>
         </div>
     </div>
+
+    <script>
+        let seconds = 5;
+        const secondsEl = document.getElementById('seconds');
+        const interval = setInterval(() => {
+            seconds--;
+            secondsEl.innerText = seconds;
+            if (seconds <= 0) clearInterval(interval);
+        }, 1000);
+    </script>
 </body>
 
 </html>
