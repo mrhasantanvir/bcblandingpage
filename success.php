@@ -14,7 +14,49 @@ require_once 'config.php';
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1099891287028927');
+        fbq('track', 'PageView');
+        fbq('track', 'Purchase', { value: <?php echo OFFER_PRICE; ?>, currency: 'BDT' });
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1099891287028927&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD8ZMD3P4N"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-SD8ZMD3P4N');
+    </script>
+
     <style>
+        /* Prevent Flash of Unstyled Content */
+        html {
+            background-color: #030014;
+        }
+
+        body {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background-color: #030014;
+        }
+
         body {
             font-family: 'Outfit', 'Hind Siliguri', sans-serif;
             background-color: #030014;
@@ -65,6 +107,12 @@ require_once 'config.php';
         </p>
     </div>
 
+    <script>
+        window.addEventListener('load', () => {
+            document.body.style.visibility = 'visible';
+            document.body.style.opacity = '1';
+        });
+    </script>
 </body>
 
 </html>
