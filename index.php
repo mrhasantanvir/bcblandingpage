@@ -99,48 +99,43 @@ require_once 'config.php';
         const emailWarning = document.getElementById('email-warning');
         const submitBtn = document.querySelector('.btn-payment');
 
-        emailInput.addEventListener('blur', function() {
-            const email = this.value;
-            if (email.length < 5) {
-                emailWarning.style.display = 'none';
-                return;
-            }
-
-            emailWarning.style.display = 'block';
-            emailWarning.style.color = '#aaa';
-            emailWarning.innerText = 'যাচাই করা হচ্ছে...';
-
-            fetch(`check_email.php?email=${encodeURIComponent(email)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'exists') {
-                        emailWarning.innerText = data.message;
-                        emailWarning.style.color = '#ff4d4d';
-                        emailInput.style.borderColor = '#ff4d4d';
-                        submitBtn.disabled = true;
-                        submitBtn.style.opacity = '0.5';
-                        submitBtn.style.cursor = 'not-allowed';
-                    } else {
-                        emailWarning.style.display = 'none';
-                        emailInput.style.borderColor = 'rgba(255,255,255,0.1)';
-                        submitBtn.disabled = false;
-                        submitBtn.style.opacity = '1';
-                        submitBtn.style.cursor = 'pointer';
-                    }
-                })
-                .catch(err => {
-                    console.error('Email check failed', err);
-                    emailWarning.style.display = 'none';
-                });
-        });
-
-        // Clear warning on input start
+        let timeout = null;
         emailInput.addEventListener('input', function() {
+            const email = this.value;
+            
+            // Clear warning and reset button while typing
             emailWarning.style.display = 'none';
             emailInput.style.borderColor = 'rgba(255,255,255,0.1)';
             submitBtn.disabled = false;
             submitBtn.style.opacity = '1';
             submitBtn.style.cursor = 'pointer';
+
+            if (email.length < 5 || !email.includes('@')) return;
+
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                emailWarning.style.display = 'block';
+                emailWarning.style.color = '#aaa';
+                emailWarning.innerText = 'যাচাই করা হচ্ছে...';
+
+                fetch(`check_email.php?email=${encodeURIComponent(email)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'exists') {
+                            emailWarning.innerText = data.message;
+                            emailWarning.style.color = '#ff4d4d';
+                            emailInput.style.borderColor = '#ff4d4d';
+                            submitBtn.disabled = true;
+                            submitBtn.style.opacity = '0.5';
+                            submitBtn.style.cursor = 'not-allowed';
+                        } else {
+                            emailWarning.style.display = 'none';
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Email check failed', err);
+                    });
+            }, 800); // 800ms delay after typing stops
         });
 
         document.getElementById('paymentForm').addEventListener('submit', function (e) {
