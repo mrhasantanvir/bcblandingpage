@@ -62,7 +62,7 @@ require_once 'config.php';
 
                     <button type="submit" class="btn-payment">
                         <img src="https://www.bkash.com/uploads/2021/05/bKash-Logo.png" alt="bKash">
-                        ৯৯৯ টাকায় এখনই কিনুন
+                        ১ টাকায় এখনইকিনুন
                     </button>
                 </form>
             </div>
