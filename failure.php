@@ -8,67 +8,74 @@ $error_msg = $_GET['msg'] ?? 'আপনার পেমেন্টটি সম
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>পেমেন্ট ব্যর্থ - বাংলা চ্যাটবট</title>
+    <title>পেমেন্ট ব্যর্থ - Bangla Chatbot</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font (Hind Siliguri for Bangla) -->
+    <!-- Google Font (Hind Siliguri) -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
+        :root {
+            --dark-bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+
         body {
             font-family: 'Hind Siliguri', sans-serif;
-            background-color: #f3f4f6;
+            background-color: var(--dark-bg);
+            color: #f8fafc;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.1), transparent 40%);
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<body class="hero-gradient min-h-screen flex flex-col justify-center items-center py-12 px-4">
 
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <!-- Main Card -->
-        <div class="bg-white py-12 px-6 shadow-2xl sm:rounded-lg sm:px-10 border-t-4 border-red-500 text-center">
-
-            <!-- Error Icon -->
-            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-red-100 mb-6">
-                <i class="fa-solid fa-xmark text-4xl text-red-600"></i>
-            </div>
-
-            <h2 class="text-3xl font-extrabold text-gray-900 mb-4">
-                দুঃখিত! পেমেন্ট ব্যর্থ
-            </h2>
-
-            <div class="bg-red-50 border border-red-100 rounded-lg p-6 mb-8 text-left">
-                <p class="text-red-800 font-medium">
-                    সমস্যাটি হলো:
-                </p>
-                <p class="mt-2 text-gray-700">
-                    <?php echo htmlspecialchars($error_msg); ?>
-                </p>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="space-y-4">
-                <a href="index.php"
-                    class="w-full flex justify-center py-4 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition duration-150">
-                    আবার চেষ্টা করুন <i class="fa-solid fa-rotate-right ml-2 mt-1"></i>
-                </a>
-
-                <a href="https://wa.me/8801707676797" target="_blank"
-                    class="w-full flex justify-center py-3 px-4 border border-green-200 rounded-md shadow-sm text-base font-bold text-green-700 bg-white hover:bg-green-50 transition duration-150">
-                    <i class="fa-brands fa-whatsapp mr-2 text-xl"></i> হোয়াটসঅ্যাপে সাপোর্ট নিন
-                </a>
-            </div>
-
-            <p class="mt-8 text-sm text-gray-500">
-                পেমেন্ট সংক্রান্ত কোনো অভিযোগ থাকলে আমাদের জানাতে পারেন।
-            </p>
+    <div class="w-full max-w-lg glass-card rounded-[2rem] p-10 text-center animate-fade-in shadow-2xl">
+        <!-- Error Icon -->
+        <div class="w-24 h-24 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
+            <i class="fa-solid fa-xmark text-4xl text-red-500"></i>
         </div>
 
-        <p class="text-center text-gray-500 text-xs mt-8">
-            &copy; <?php echo date('Y'); ?> বাংলা চ্যাটবট। সর্বস্বত্ব সংরক্ষিত।
+        <h1 class="text-3xl font-bold mb-4">দুঃখিত! পেমেন্ট ব্যর্থ হয়েছে</h1>
+
+        <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-6 mb-10 text-red-400">
+            <p class="text-sm font-bold uppercase mb-2">কারণ:</p>
+            <p class="text-lg"><?php echo htmlspecialchars($error_msg); ?></p>
+        </div>
+
+        <div class="space-y-4">
+            <a href="index.php"
+                class="btn-premium block w-full py-5 rounded-2xl text-white font-bold text-lg hover:shadow-lg transition flex items-center justify-center space-x-3">
+                <i class="fa-solid fa-rotate-left"></i>
+                <span>আবার চেষ্টা করুন</span>
+            </a>
+
+            <a href="https://wa.me/8801707676797" target="_blank"
+                class="block w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-300 font-bold hover:bg-white/10 transition flex items-center justify-center space-x-3">
+                <i class="fa-brands fa-whatsapp text-green-500 text-xl"></i>
+                <span>হোয়াটসঅ্যাপে আমাদের সাথে কথা বলুন</span>
+            </a>
+        </div>
+
+        <p class="mt-10 text-slate-500 text-xs tracking-widest uppercase">
+            &copy; <?php echo date('Y'); ?> Bangla Chatbot. All rights reserved.
         </p>
     </div>
 
