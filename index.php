@@ -16,35 +16,56 @@ require_once 'config.php';
 
     <!-- Meta Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1099891287028927');
-    fbq('track', 'PageView');
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1099891287028927');
+        fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1099891287028927&ev=PageView&noscript=1"
-    /></noscript>
+            src="https://www.facebook.com/tr?id=1099891287028927&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SD8ZMD3P4N"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-SD8ZMD3P4N');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-SD8ZMD3P4N');
+    </script>
+
+    <script>
+        // Force hide body immediately to prevent flickering (FOUC)
+        document.documentElement.style.backgroundColor = "#030014";
+        document.write('<style id="anti-flicker">body{display:none !important;}</style>');
+        window.addEventListener('load', () => {
+            const style = document.getElementById('anti-flicker');
+            if (style) style.remove();
+            document.body.style.display = 'block';
+            document.body.style.opacity = '0';
+            setTimeout(() => { document.body.style.opacity = '1'; }, 10);
+        });
     </script>
 
     <style>
-        /* Prevent Flash of Unstyled Content */
-        html { background-color: #030014; }
-        body { visibility: hidden; opacity: 0; transition: opacity 0.5s ease; background-color: #030014; }
+        body {
+            font-family: 'Outfit', 'Hind Siliguri', sans-serif;
+            background-color: #030014;
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+            transition: opacity 0.8s ease;
+        }
+
         :root {
             --bg-color: #030014;
             --accent-purple: #7c3aed;
@@ -424,30 +445,24 @@ require_once 'config.php';
     </footer>
 
     <script>
-        // Reveal body after page load to prevent flicker
-        window.addEventListener('load', () => {
-            document.body.style.visibility = 'visible';
-            document.body.style.opacity = '1';
-        });
-
         // Smooth reveal on scroll helper
-        const reveal = () =>  {
+        const reveal = () => {
             const elements = document.querySelectorAll('.glass-card, .hero-title');
             elements.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if(rect.top < window.innerHeight - 100) {
+                if (rect.top < window.innerHeight - 100) {
                     el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
                 }
             });
         };
         window.addEventListener('scroll', reveal);
-        
+
         // Email check
         const emailInput = document.getElementById('email');
         const submitBtn = document.querySelector('.btn-payment');
-        
-        emailInput.addEventListener('input', function() {
+
+        emailInput.addEventListener('input', function () {
             const email = this.value;
             if (email.length < 5 || !email.includes('@')) return;
 
@@ -464,7 +479,7 @@ require_once 'config.php';
                 });
         });
 
-        document.getElementById('paymentForm').addEventListener('submit', function() {
+        document.getElementById('paymentForm').addEventListener('submit', function () {
             submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
         });
     </script>
