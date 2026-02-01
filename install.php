@@ -34,6 +34,17 @@ define('OFFER_CURRENCY', 'BDT');
 
 define('SITE_URL', '$site_url');
 define('CALLBACK_URL', SITE_URL . '/callback.php');
+
+// SMTP Configuration
+define('SMTP_HOST', 'email-smtp.ap-southeast-2.amazonaws.com');
+define('SMTP_PORT', 587);
+define('SMTP_USERNAME', 'AKIAXNKJHE4LUSHHQX75');
+define('SMTP_PASSWORD', 'BHmj9TS/inERd7UZstYmtJxfPqXKinc1M6MXRVVsYldc');
+define('SMTP_ENCRYPTION', 'tls');
+define('SMTP_FROM_EMAIL', 'noreply@banglachatbot.com');
+define('SMTP_FROM_NAME', 'Bangla Chatbot');
+
+define('WHATSAPP_SUPPORT', '8801707676797');
 ?>";
 
     if (file_put_contents($config_file, $config_content)) {
@@ -57,8 +68,10 @@ define('CALLBACK_URL', SITE_URL . '/callback.php');
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: auto;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px 0;
         }
 
         .wizard {

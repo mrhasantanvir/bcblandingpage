@@ -35,6 +35,11 @@ if ($status == 'success') {
 
                 if (isset($createResponse['status']) && $createResponse['status'] == 'success') {
                     // Registration Successful
+                    // Send Welcome Email
+                    require_once 'includes/email_handler.php';
+                    $emailHandler = new EmailHandler();
+                    $emailHandler->sendWelcomeEmail($userData['email'], $userData['name'], $userData['password']);
+
                     // Clear Session
                     session_destroy();
                     header("Location: success.php");
