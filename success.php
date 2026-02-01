@@ -72,13 +72,13 @@ $userData = $_SESSION['user_data'] ?? null;
             <p>আপনার অ্যাকাউন্টটি সক্রিয় করা হয়েছে। আপনাকে ৫ সেকেন্ডের মধ্যে সরাসরি ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে...</p>
 
             <?php if ($userData): ?>
-                <form id="autoLoginForm" action="https://app.banglachatbot.com/login" method="POST">
+                <form id="autoLoginForm" action="https://app.banglachatbot.com/home/login_page" method="POST">
                     <input type="hidden" name="email" value="<?php echo htmlspecialchars($userData['email']); ?>">
                     <input type="hidden" name="password" value="<?php echo htmlspecialchars($userData['password']); ?>">
                     <button type="submit" class="btn-login">সরাসরি ড্যাশবোর্ডে যান</button>
                 </form>
             <?php else: ?>
-                <a href="https://app.banglachatbot.com/login" class="btn-login">সরাসরি লগইন করুন</a>
+                <a href="https://app.banglachatbot.com/home/login_page" class="btn-login">সরাসরি লগইন করুন</a>
             <?php endif; ?>
 
             <div class="countdown">রিডাইরেক্ট হতে বাকি: <span id="seconds">5</span> সেকেন্ড</div>
@@ -98,7 +98,7 @@ $userData = $_SESSION['user_data'] ?? null;
                 if (autoLoginForm) {
                     autoLoginForm.submit();
                 } else {
-                    window.location.href = "https://app.banglachatbot.com/login";
+                    window.location.href = "https://app.banglachatbot.com/home/login_page";
                 }
             }
         }, 1000);
