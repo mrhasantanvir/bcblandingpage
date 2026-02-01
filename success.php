@@ -70,18 +70,6 @@ require_once 'config.php';
             transition: opacity 0.5s ease;
         }
 
-        font-family: 'Outfit',
-        'Hind Siliguri',
-        sans-serif;
-        background-color: #030014;
-        color: #ffffff;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: screen;
-        }
-
         .success-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -91,7 +79,7 @@ require_once 'config.php';
     </style>
 </head>
 
-<body class="min-h-screen p-6">
+<body class="p-6">
 
     <div class="max-w-md w-full text-center success-card p-10 md:p-12 shadow-2xl">
         <div

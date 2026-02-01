@@ -12,11 +12,20 @@ use PHPMailer\PHPMailer\Exception;
 
 class EmailHandler
 {
+    private function log($message)
+    {
+        $logFile = __DIR__ . '/../email_log.txt';
+        $timestamp = date('Y-m-d H:i:s');
+        file_put_contents($logFile, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
+    }
+
     public function sendWelcomeEmail($userEmail, $userName, $password)
     {
-        // Prevent 500 if class doesn't exist (because composer install wasn't run)
+        $this->log("Attempting to send email to: $userEmail");
+
+        // Prevent 500 if class doesn't exist
         if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
-            error_log("PHPMailer not found. Skipping email.");
+            $this->log("CRITICAL ERROR: PHPMailer class not found. Check vendor folder.");
             return false;
         }
 
@@ -29,12 +38,13 @@ class EmailHandler
             $mail->SMTPAuth = true;
             $mail->Username = SMTP_USERNAME;
             $mail->Password = SMTP_PASSWORD;
-            $mail->SMTPSecure = SMTP_ENCRYPTION;
+            $mail->SMTPSecure = (SMTP_ENCRYPTION == 'tls') ? PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = SMTP_PORT;
+            $mail->Timeout = 10; // Set timeout for better UX if it hangs
 
             // Recipients
             $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
-            $mail->addAddress($userEmail, $userName);
+            $mail->addAddress(trim($userEmail), $userName);
 
             // Content
             $mail->isHTML(true);
@@ -62,9 +72,10 @@ class EmailHandler
 
             $mail->Body = $body;
             $mail->send();
+            $this->log("SUCCESS: Email sent successfully to $userEmail");
             return true;
         } catch (Exception $e) {
-            error_log("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+            $this->log("FAILED: Mailer Error: {$mail->ErrorInfo}");
             return false;
         }
     }
