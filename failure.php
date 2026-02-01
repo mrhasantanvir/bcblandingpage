@@ -20,7 +20,7 @@ $error_msg = $_GET['msg'] ?? 'আপনার পেমেন্টটি সম
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -44,19 +44,20 @@ $error_msg = $_GET['msg'] ?? 'আপনার পেমেন্টটি সম
         gtag('config', 'G-SD8ZMD3P4N');
     </script>
 
+    <script>
+        // Force hide body immediately to prevent flickering (FOUC)
+        document.documentElement.style.backgroundColor = "#030014";
+        document.write('<style id="anti-flicker">body{display:none !important;}</style>');
+        window.addEventListener('load', () => {
+            const style = document.getElementById('anti-flicker');
+            if (style) style.remove();
+            document.body.style.display = 'flex';
+            document.body.style.opacity = '0';
+            setTimeout(() => { document.body.style.opacity = '1'; }, 10);
+        });
+    </script>
+
     <style>
-        /* Prevent Flash of Unstyled Content */
-        html {
-            background-color: #030014;
-        }
-
-        body {
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            background-color: #030014;
-        }
-
         body {
             font-family: 'Outfit', 'Hind Siliguri', sans-serif;
             background-color: #030014;
@@ -65,7 +66,20 @@ $error_msg = $_GET['msg'] ?? 'আপনার পেমেন্টটি সম
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: screen;
+            min-height: 100vh;
+            transition: opacity 0.5s ease;
+        }
+
+        font-family: 'Outfit',
+        'Hind Siliguri',
+        sans-serif;
+        background-color: #030014;
+        color: #ffffff;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: screen;
         }
 
         .fail-card {

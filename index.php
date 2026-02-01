@@ -289,11 +289,6 @@ require_once 'config.php';
             <span class="text-xl font-black tracking-tighter uppercase italic">Bangla<span
                     class="text-purple-500">Chatbot</span></span>
         </div>
-        <div class="hidden lg:flex items-center space-x-12">
-            <a href="#" class="nav-link">Solutions</a>
-            <a href="#" class="nav-link">Integrations</a>
-            <a href="#" class="nav-link">Pricing</a>
-        </div>
         <div class="flex items-center space-x-8">
             <a href="https://app.banglachatbot.com/home/login_page"
                 class="nav-link !opacity-60 underline underline-offset-8">Log In</a>
