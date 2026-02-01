@@ -28,7 +28,7 @@ define('BKASH_APP_SECRET', '$bkash_app_secret');
 define('BKASH_USERNAME', '$bkash_username');
 define('BKASH_PASSWORD', '$bkash_password');
 
-define('OFFER_PACKAGE_ID', 16);
+define('OFFER_PACKAGE_ID', 27);
 define('OFFER_PRICE', '1.00');
 define('OFFER_CURRENCY', 'BDT');
 

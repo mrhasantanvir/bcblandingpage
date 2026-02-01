@@ -1,5 +1,6 @@
 <?php
-require_once 'config.php';
+session_start(); // Note: session_destroy() removed to allow success.php to access user_data for auto-login
+$userData = $_SESSION['user_data'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -45,6 +46,8 @@ require_once 'config.php';
             border-radius: 10px;
             font-weight: bold;
             transition: 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-login:hover {
@@ -58,7 +61,6 @@ require_once 'config.php';
             margin-top: 20px;
         }
     </style>
-    <meta http-equiv="refresh" content="5;url=https://app.banglachatbot.com/login">
 </head>
 
 <body>
@@ -67,8 +69,18 @@ require_once 'config.php';
         <div class="glass-card success-card" style="margin-top: 100px;">
             <div class="icon">✓</div>
             <h1>অভিনন্দন! পেমেন্ট সফল হয়েছে</h1>
-            <p>আপনার অ্যাকাউন্টটি সক্রিয় করা হয়েছে। আপনাকে ৫ সেকেন্ডের মধ্যে ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে...</p>
-            <a href="https://app.banglachatbot.com/login" class="btn-login">সরাসরি লগইন করুন</a>
+            <p>আপনার অ্যাকাউন্টটি সক্রিয় করা হয়েছে। আপনাকে ৫ সেকেন্ডের মধ্যে সরাসরি ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে...</p>
+
+            <?php if ($userData): ?>
+                <form id="autoLoginForm" action="https://app.banglachatbot.com/login" method="POST">
+                    <input type="hidden" name="email" value="<?php echo htmlspecialchars($userData['email']); ?>">
+                    <input type="hidden" name="password" value="<?php echo htmlspecialchars($userData['password']); ?>">
+                    <button type="submit" class="btn-login">সরাসরি ড্যাশবোর্ডে যান</button>
+                </form>
+            <?php else: ?>
+                <a href="https://app.banglachatbot.com/login" class="btn-login">সরাসরি লগইন করুন</a>
+            <?php endif; ?>
+
             <div class="countdown">রিডাইরেক্ট হতে বাকি: <span id="seconds">5</span> সেকেন্ড</div>
         </div>
     </div>
@@ -76,10 +88,19 @@ require_once 'config.php';
     <script>
         let seconds = 5;
         const secondsEl = document.getElementById('seconds');
+        const autoLoginForm = document.getElementById('autoLoginForm');
+
         const interval = setInterval(() => {
             seconds--;
-            secondsEl.innerText = seconds;
-            if (seconds <= 0) clearInterval(interval);
+            if (secondsEl) secondsEl.innerText = seconds;
+            if (seconds <= 0) {
+                clearInterval(interval);
+                if (autoLoginForm) {
+                    autoLoginForm.submit();
+                } else {
+                    window.location.href = "https://app.banglachatbot.com/login";
+                }
+            }
         }, 1000);
     </script>
 </body>
