@@ -13,7 +13,6 @@ if ($status == 'success') {
     $idToken = $_SESSION['bkash_token'] ?? '';
 
     if (empty($idToken)) {
-        // If session expired, try to get a new token (though this shouldn't happen in a few seconds)
         $tokenResponse = $bkash->getGrantToken();
         $idToken = $tokenResponse['id_token'] ?? '';
     }
@@ -36,27 +35,29 @@ if ($status == 'success') {
 
                 if (isset($createResponse['status']) && $createResponse['status'] == 'success') {
                     // Registration Successful
-                    echo "<h1>পেমেন্ট সফল হয়েছে!</h1>";
-                    echo "<p>আপনার অ্যাকাউন্ট তৈরি করা হয়েছে। আপনি এখন <a href='https://app.banglachatbot.com'>Bangla Chatbot</a>-এ লগইন করতে পারেন।</p>";
+                    header("Location: success.php");
+                    exit();
                 } else {
                     $error = $createResponse['message'] ?? 'Unknown API Error';
-                    echo "<h1>পেমেন্ট সফল, কিন্তু অ্যাকাউন্ট তৈরিতে সমস্যা হয়েছে।</h1>";
-                    echo "<p>ত্রুটি: $error</p>";
-                    echo "<p>অনুগ্রহ করে আপনার পেমেন্ট আইডি ($paymentID) নিয়ে আমাদের সাপোর্ট সেন্টারে যোগাযোগ করুন।</p>";
+                    header("Location: failure.php?msg=" . urlencode("পেমেন্ট সফল হলেও অ্যাকাউন্ট তৈরিতে সমস্যা হয়েছে: " . $error));
+                    exit();
                 }
             } else {
-                echo "<h1>সেশন ড্যাটা খুঁজে পাওয়া যায়নি।</h1>";
+                header("Location: failure.php?msg=" . urlencode("সেশন ড্যাটা খুঁজে পাওয়া যায়নি।"));
+                exit();
             }
         } else {
-            echo "<h1>পেমেন্ট এক্সিকিউশন ব্যর্থ হয়েছে।</h1>";
-            echo "<p>Status: " . ($executeResponse['statusMessage'] ?? 'Failed') . "</p>";
+            $error = $executeResponse['statusMessage'] ?? 'পেমেন্ট এক্সিকিউশন ব্যর্থ হয়েছে।';
+            header("Location: failure.php?msg=" . urlencode($error));
+            exit();
         }
     } else {
-        echo "<h1>পেমেন্ট ভেরিফিকেশন করা সম্ভব হয়নি।</h1>";
+        header("Location: failure.php?msg=" . urlencode("পেমেন্ট ভেরিফিকেশন করা সম্ভব হয়নি।"));
+        exit();
     }
 } else {
-    echo "<h1>পেমেন্ট বাতিল বা ব্যর্থ হয়েছে।</h1>";
-    echo "<p><a href='index.php'>আবার চেষ্টা করুন</a></p>";
+    header("Location: failure.php?msg=" . urlencode("পেমেন্ট বাতিল বা ব্যর্থ হয়েছে।"));
+    exit();
 }
 
 // Clear Session

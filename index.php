@@ -50,6 +50,7 @@ require_once 'config.php';
                     <div class="form-group">
                         <label for="email">ইমেইল অ্যাড্রেস</label>
                         <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+                        <div id="email-warning" style="color: #ff4d4d; font-size: 0.8rem; margin-top: 5px; display: none;"></div>
                     </div>
                     <div class="form-group">
                         <label for="password">পাসওয়ার্ড (নতুন অ্যাকাউন্টের জন্য)</label>
@@ -93,11 +94,43 @@ require_once 'config.php';
     </div>
 
     <script>
-        // Simple form validation or enhancements can go here
+        // Real-time email validation
+        const emailInput = document.getElementById('email');
+        const emailWarning = document.getElementById('email-warning');
+        const submitBtn = document.querySelector('.btn-payment');
+
+        emailInput.addEventListener('blur', function() {
+            const email = this.value;
+            if (email.length < 5) return;
+
+            emailWarning.style.display = 'block';
+            emailWarning.style.color = '#aaa';
+            emailWarning.innerText = 'যাচাই করা হচ্ছে...';
+
+            fetch(`check_email.php?email=${encodeURIComponent(email)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'exists') {
+                        emailWarning.innerText = data.message;
+                        emailWarning.style.color = '#ff4d4d';
+                        submitBtn.disabled = true;
+                        submitBtn.style.opacity = '0.5';
+                    } else {
+                        emailWarning.style.display = 'none';
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                    }
+                })
+                .catch(err => {
+                    console.error('Email check failed', err);
+                    emailWarning.style.display = 'none';
+                });
+        });
+
         document.getElementById('paymentForm').addEventListener('submit', function (e) {
             const btn = e.target.querySelector('.btn-payment');
             btn.innerHTML = 'প্রসেসিং হচ্ছে...';
-            btn.disabled = true;
+            btn.style.opacity = '0.7';
         });
     </script>
 </body>
