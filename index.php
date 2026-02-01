@@ -3,252 +3,292 @@ require_once 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bangla Chatbot - Business Automation Expert</title>
-    <!-- Tailwind CSS -->
+    <title>Bangla Chatbot - Next Gen Automation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --brand-primary: #2563eb;
-            --brand-secondary: #3b82f6;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --bg-deep: #0a0518;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #d946ef;
+            --accent-gold: #f59e0b;
         }
 
         body {
-            font-family: 'Inter', 'Hind Siliguri', sans-serif;
-            background-color: #f8fafc;
-            color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Outfit', 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-deep);
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(217, 70, 239, 0.1) 0%, transparent 40%),
+                var(--bg-deep);
         }
 
-        .hero-pattern {
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
-            background-size: 30px 30px;
+        .glass-nav {
+            background: rgba(10, 5, 24, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        .hero-title {
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff 40%, rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .btn-brand {
-            background-color: var(--brand-primary);
+        .neon-btn {
+            background: #ffffff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            transition: all 0.4s ease;
+        }
+
+        .neon-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,255,255,0.4);
+        }
+
+        /* Orbit Animation inspired by screenshot */
+        .orbit-container {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            margin: auto;
+        }
+
+        .orbit-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .inner-circle { width: 150px; height: 150px; }
+        .middle-circle { width: 300px; height: 300px; }
+        .outer-circle { width: 450px; height: 450px; }
+
+        .orbital-item {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+        }
+
+        .orbital-item-2 { animation: spin2 25s linear infinite; }
+        @keyframes spin2 {
+            from { transform: rotate(0deg) translateX(225px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(225px) rotate(-360deg); }
+        }
+
+        .center-stat {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        /* Form Styling */
+        .premium-input {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
             color: white;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s ease;
         }
-
-        .btn-brand:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-1px);
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
-        }
-
-        .form-input {
-            border: 1px solid #e2e8f0;
-            background-color: white;
-            transition: all 0.2s;
-        }
-
-        .form-input:focus {
-            border-color: var(--brand-primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        .premium-input:focus {
+            background: rgba(255,255,255,0.06);
+            border-color: var(--accent-purple);
             outline: none;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
         }
 
-        .feature-icon {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            color: var(--brand-primary);
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-
-        h1,
-        h2,
-        h3 {
-            font-family: 'Hind Siliguri', sans-serif;
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
+<body class="antialiased">
 
-<body class="hero-pattern min-h-screen">
-
-    <!-- Simple Navigation -->
-    <nav class="py-6 px-4 md:px-8 max-w-7xl mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <img src="https://app.banglachatbot.com/assets/img/logo.png" alt="Bangla Chatbot" class="h-10">
-            <span class="text-xl font-bold tracking-tight text-slate-800">Bangla <span
-                    class="text-blue-600">Chatbot</span></span>
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <img src="https://app.banglachatbot.com/assets/img/logo.png" alt="Logo" class="h-8">
+            <span class="text-xl font-bold tracking-tighter">Bangla<span class="text-purple-500">Chatbot</span></span>
         </div>
-        <a href="https://wa.me/8801707676797"
-            class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition flex items-center">
-            <i class="fa-brands fa-whatsapp text-green-500 mr-2 text-lg"></i> সাপোর্ট নিন
-        </a>
+        <div class="hidden md:flex space-x-8 text-sm font-medium opacity-60">
+            <a href="#" class="hover:text-white transition">Features</a>
+            <a href="#" class="hover:text-white transition">Solutions</a>
+            <a href="#" class="hover:text-white transition">Pricing</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="https://app.banglachatbot.com/home/login_page" class="text-sm font-medium opacity-60 hover:opacity-100 transition">Log In</a>
+            <button onclick="document.getElementById('order-form').scrollIntoView({behavior:'smooth'})" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-bold shadow-lg hover:bg-purple-500 transition">Join Now</button>
+        </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 py-12 md:py-20 flex flex-col lg:flex-row items-center gap-16">
-
-        <!-- Left Side: Content & Social Proof -->
-        <div class="lg:w-1/2 space-y-10">
-            <div class="animate-fade-in">
-                <span
-                    class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-6">
-                    স্মার্ট বিজনেস সলিউশন
-                </span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.15] mb-6">
-                    আপনার ব্যবসার বিক্রয় বাড়ান <br>
-                    <span class="text-blue-600">এআই চ্যাটবট</span> দিয়ে
-                </h1>
-                <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
-                    গ্রাহকের প্রতিটি মেসেজের ইনস্ট্যান্ট উত্তর দিন। আমাদের চ্যাটবট আপনার ফেসবুক ও মেসেঞ্জার পেজকে অটোমেট
-                    করে কেনাবেচাকে করবে আগের চেয়েও সহজ।
-                </p>
-            </div>
-
-            <!-- Features Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div class="flex items-start space-x-4">
-                    <div
-                        class="feature-icon w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-blue-100">
-                        <i class="fa-solid fa-bolt-lightning text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-800 mb-1">অটো-রিপ্লাই</h3>
-                        <p class="text-sm text-slate-500 italic">গ্রাহকের কমন সব প্রশ্নের ইনস্ট্যান্ট উত্তর।</p>
-                    </div>
-                </div>
-                <div class="flex items-start space-x-4">
-                    <div
-                        class="feature-icon w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-blue-100">
-                        <i class="fa-solid fa-chart-line text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-800 mb-1">সেলস বৃদ্ধি</h3>
-                        <p class="text-sm text-slate-500 italic">লিড কালেক্ট করে অর্ডার কনভার্ট করার ক্ষমতা।</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Trusted Badge -->
-            <div class="pt-6 border-t border-slate-200">
-                <div class="flex items-center space-x-4 opacity-70">
-                    <div class="flex -space-x-2">
-                        <img src="https://ui-avatars.com/api/?name=User+1&background=random"
-                            class="w-8 h-8 rounded-full border-2 border-white">
-                        <img src="https://ui-avatars.com/api/?name=User+2&background=random"
-                            class="w-8 h-8 rounded-full border-2 border-white">
-                        <img src="https://ui-avatars.com/api/?name=User+3&background=random"
-                            class="w-8 h-8 rounded-full border-2 border-white">
-                    </div>
-                    <p class="text-sm font-medium text-slate-600">প্ৰায় ৫০০+ উদ্যোক্তা আমাদের ওপর বিশ্বাস রেখেছেন</p>
-                </div>
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16">
+        
+        <div class="lg:w-1/2 space-y-8 text-center lg:text-left">
+            <h1 class="hero-title text-5xl md:text-7xl font-extrabold leading-tight">
+                Unlock Your Business <br>
+                <span class="text-purple-500">Automation</span> Power <br>
+                In One Click!
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl max-w-xl mx-auto lg:mx-0">
+                ফেসবুক এবং মেসেঞ্জারে কাস্টমারের রিপ্লাই দিন ম্যাজিকের মতো। আমাদের এআই চ্যাটবট আপনার ব্যবসাকে করবে স্মার্ট এবং অটোমেটেড।
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                <button onclick="document.getElementById('order-form').scrollIntoView({behavior:'smooth'})" class="neon-btn px-10 py-4 rounded-full font-bold text-lg flex items-center group">
+                    Start Today 
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+                <a href="https://wa.me/8801707676797" class="text-slate-300 font-semibold flex items-center hover:text-white transition">
+                    <i class="fa-brands fa-whatsapp text-green-500 mr-2 text-2xl"></i>
+                    Get Support
+                </a>
             </div>
         </div>
 
-        <!-- Right Side: Order Card -->
-        <div class="lg:w-1/2 w-full max-w-xl">
-            <div
-                class="bg-white rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)] p-8 md:p-12 border border-slate-100 relative overflow-hidden">
-
-                <!-- Pricing Header -->
-                <div class="relative z-10 text-center mb-10">
-                    <p class="text-sm font-bold text-blue-600 uppercase tracking-widest mb-2">মেগা সাবস্ক্রিপশন প্ল্যান
-                    </p>
-                    <div class="flex justify-center items-baseline space-x-2">
-                        <span
-                            class="text-7xl font-black text-slate-900">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
-                        <div class="text-left">
-                            <p class="text-lg text-slate-400 line-through font-medium">৳৫,০০০</p>
-                            <p class="text-xs font-bold text-red-500">বড় ছাড়!</p>
-                        </div>
-                    </div>
-                    <p class="mt-4 text-slate-500 text-sm font-medium italic">১ বছরের আনলিমিটেড এক্সেস + হাই-স্পিড
-                        সার্ভার</p>
+        <!-- Orbiting Graphic -->
+        <div class="lg:w-1/2 relative hidden md:block">
+            <div class="orbit-container">
+                <div class="orbit-circle inner-circle"></div>
+                <div class="orbit-circle middle-circle"></div>
+                <div class="orbit-circle outer-circle"></div>
+                
+                <div class="center-stat">
+                    <span class="text-5xl font-extrabold">500+</span>
+                    <p class="text-sm text-slate-500 font-bold uppercase tracking-widest mt-2">Active Users</p>
                 </div>
 
-                <!-- Registration Form -->
-                <form id="paymentForm" action="process_payment.php" method="POST" class="space-y-4 relative z-10">
-                    <div>
-                        <input type="text" name="name" required placeholder="আপনার পুরো নাম"
-                            class="form-input w-full p-4 rounded-2xl text-slate-800 placeholder:text-slate-400">
-                    </div>
-                    <div>
-                        <input type="email" id="email" name="email" required placeholder="আপনার ইমেইল এড্রেস"
-                            class="form-input w-full p-4 rounded-2xl text-slate-800 placeholder:text-slate-400">
-                        <div id="email-warning" class="text-[0.7rem] mt-2 ml-1 hidden"></div>
-                    </div>
-                    <div>
-                        <input type="password" name="password" required placeholder="লগইন পাসওয়ার্ড সেট করুন"
-                            class="form-input w-full p-4 rounded-2xl text-slate-800 placeholder:text-slate-400">
-                    </div>
-                    <div>
-                        <input type="tel" name="mobile" required placeholder="মোবাইল নম্বর"
-                            class="form-input w-full p-4 rounded-2xl text-slate-800 placeholder:text-slate-400">
-                    </div>
+                <!-- Orbiting items -->
+                <div class="orbital-item" style="animation-duration: 15s;">
+                    <i class="fa-solid fa-comment-dots text-purple-400"></i>
+                </div>
+                <div class="orbital-item orbital-item-2" style="animation-duration: 20s; animation-delay: -5s;">
+                    <i class="fa-solid fa-robot text-blue-400"></i>
+                </div>
+                <div class="orbital-item orbital-item-2" style="animation-duration: 25s; animation-delay: -15s;">
+                    <i class="fa-solid fa-rocket text-pink-400"></i>
+                </div>
+                <div class="orbital-item" style="animation-duration: 18s; animation-delay: -10s;">
+                    <i class="fa-solid fa-chart-line text-green-400"></i>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <button type="submit"
-                        class="btn-payment btn-brand w-full py-5 rounded-2xl font-bold text-lg flex items-center justify-center space-x-3 group">
-                        <span>বিকাশ দিয়ে পে করুন</span>
-                        <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
-                    </button>
+    <!-- Partners Row -->
+    <div class="py-12 border-y border-white/5 opacity-30 grayscale hover:grayscale-0 transition duration-1000">
+        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-8">
+            <img src="https://ui-avatars.com/api/?name=Partner+1&background=000&color=fff&size=128" class="h-8">
+            <img src="https://ui-avatars.com/api/?name=Partner+2&background=000&color=fff&size=128" class="h-8">
+            <img src="https://ui-avatars.com/api/?name=Partner+3&background=000&color=fff&size=128" class="h-8">
+            <img src="https://ui-avatars.com/api/?name=Partner+4&background=000&color=fff&size=128" class="h-8">
+            <img src="https://ui-avatars.com/api/?name=Partner+5&background=000&color=fff&size=128" class="h-8">
+        </div>
+    </div>
 
-                    <p class="text-center text-slate-400 text-[0.65rem] uppercase tracking-widest pt-4">সব পেমেন্ট
-                        গেটওয়ে সাপোর্ট করে</p>
+    <!-- Order Form Section -->
+    <section id="order-form" class="py-24 px-6 md:px-12 bg-white/0">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">সীমাবদ্ধ সময়ের অফার</h2>
+                <div class="inline-flex items-center bg-purple-600/20 text-purple-400 px-6 py-2 rounded-full font-bold">
+                    ১ বছরের মেগা সাবস্ক্রিপশন মাত্র ৳<?php echo number_format(OFFER_PRICE, 0); ?>
+                </div>
+            </div>
+
+            <div class="bg-white/5 backdrop-blur-3xl p-8 md:p-12 rounded-[3rem] border border-white/10 shadow-3xl scroll-reveal">
+                <form id="paymentForm" action="process_payment.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-400 ml-1">আপনার নাম</label>
+                        <input type="text" name="name" required placeholder="HASIB CHOWDHURY" class="premium-input w-full p-4 rounded-2xl">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-400 ml-1">ইমেইল এড্রেস</label>
+                        <input type="email" id="email" name="email" required placeholder="MAIL@EXAMPLE.COM" class="premium-input w-full p-4 rounded-2xl">
+                        <div id="email-warning" class="text-[0.6rem] ml-1 mt-1 hidden"></div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-400 ml-1">পাসওয়ার্ড (লগইনের জন্য)</label>
+                        <input type="password" name="password" required placeholder="••••••••" class="premium-input w-full p-4 rounded-2xl">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-400 ml-1">মোবাইল নম্বর</label>
+                        <input type="tel" name="mobile" required placeholder="01XXXXXXXXX" class="premium-input w-full p-4 rounded-2xl">
+                    </div>
+                    <div class="md:col-span-2 pt-6">
+                        <button type="submit" class="btn-payment bg-white text-black w-full py-5 rounded-2xl font-black text-xl hover:bg-slate-200 transition-all flex items-center justify-center space-x-3">
+                            <span>বিকাশ দিয়ে পে করুন</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <p class="text-center text-[0.6rem] text-slate-500 uppercase tracking-widest mt-4">Security Guaranteed by bKash Gateway</p>
+                    </div>
                 </form>
-
-                <!-- Footer Pattern -->
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-blue-600"></div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Content Section -->
-    <section class="max-w-4xl mx-auto px-4 py-20 text-center border-t border-slate-100">
-        <h2 class="text-3xl font-bold text-slate-900 mb-8 italic">কেন আপনি <span class="text-blue-600">Bangla
-                Chatbot</span> ব্যবহার করবেন?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
-            <div class="p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-lg mb-3">গ্রাহক হারাবেন না</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">মাঝরাতে কোনো গ্রাহক মেসেজ দিলে আপনি হয়তো ঘুমিয়ে,
-                    কিন্তু চ্যাটবট ঘুমায় না। এটি তৎক্ষণাৎ রিপ্লাই দিয়ে গ্রাহককে ধরে রাখে।</p>
-            </div>
-            <div class="p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
-                <h3 class="font-bold text-lg mb-3">দক্ষতা বৃদ্ধি</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">একই প্রশ্ন বারবার করার উত্তর দেওয়ার বিরক্তিকর কাজ থেকে
-                    মুক্তি পান। চ্যাটবটকে শিখিয়ে দিন, সে-ই সব উত্তর দিবে।</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
-            <p class="text-slate-400 text-sm mb-6">আমাদের সাপোর্ট টিম আপনার অপেক্ষায়</p>
-            <div class="flex space-x-8">
-                <img src="https://app.banglachatbot.com/assets/img/logo.png" class="h-8 grayscale opacity-30">
+    <footer class="py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-8 grayscale opacity-50">
+                <img src="https://app.banglachatbot.com/assets/img/logo.png" alt="Logo" class="h-6">
+                <span class="text-lg font-bold tracking-tighter">BanglaChatbot</span>
             </div>
-            <p class="mt-8 text-slate-400 text-xs">
-                &copy; <?php echo date('Y'); ?> Bangla Chatbot. All rights reserved.
+            <p class="text-slate-500 text-xs tracking-widest uppercase">
+                &copy; <?php echo date('Y'); ?> Bangla Chatbot. Built for the future of business.
             </p>
         </div>
     </footer>
 
     <script>
+        // Scroll Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        });
+
+        // Email Check
         const emailInput = document.getElementById('email');
         const emailWarning = document.getElementById('email-warning');
         const submitBtn = document.querySelector('.btn-payment');
-        let timeout =  null;
+        let timeout = null;
 
         emailInput.addEventListener('input', function() {
             const email = this.value;
@@ -261,15 +301,15 @@ require_once 'config.php';
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 emailWarning.classList.remove('hidden');
-                emailWarning.innerText = 'যাচাই করা হচ্ছে...';
-                emailWarning.style.color = '#64748b';
+                emailWarning.innerText = 'CHECKING...';
+                emailWarning.style.color = '#94a3b8';
 
                 fetch(`check_email.php?email=${encodeURIComponent(email)}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'exists') {
                             emailWarning.innerText = data.message;
-                            emailWarning.style.color = '#ef4444';
+                            emailWarning.style.color = '#f87171';
                             submitBtn.disabled = true;
                             submitBtn.style.opacity = '0.5';
                         } else {
@@ -282,10 +322,9 @@ require_once 'config.php';
 
         document.getElementById('paymentForm').addEventListener('submit', function (e) {
             const btn = e.target.querySelector('.btn-payment');
-            btn.innerHTML = 'প্রসেসিং হচ্ছে <i class="fa-solid fa-circle-notch fa-spin ml-2"></i>';
+            btn.innerHTML = 'PROCESSING <i class="fa-solid fa-circle-notch fa-spin ml-2"></i>';
             btn.style.opacity = '0.7';
         });
     </script>
 </body>
-
 </html>

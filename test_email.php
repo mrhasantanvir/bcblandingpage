@@ -1,54 +1,65 @@
 <?php
 /**
- * Advanced Email Debugger
- * Use this to verify why emails are not being sent.
+ * Ultimate Email & Network Diagnostic Tool
  */
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once 'config.php';
 
-echo "<!DOCTYPE html><html><head><title>Email Debugger</title><style>body{font-family:sans-serif;background:#f4f4f balance;padding:40px;} .card{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);max-width:800px;margin:auto;} h2{color:#333;} .success{color:green;} .error{color:red;} pre{background:#eee;padding:10px;border-radius:5px;overflow-x:auto;}</style></head><body>";
-echo "<div class='card'>";
-echo "<h2>Bangla Chatbot Email System Diagnostic</h2>";
+echo "<!DOCTYPE html><html><head><title>Email Support Tool</title><style>
+body{font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f0f2f5; padding:20px; color:#333;}
+.container{max-width:900px; margin:auto; background:white; padding:30px; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.1);}
+h1{color:#1a73e8; border-bottom:2px solid #e8eaed; padding-bottom:10px;}
+.step{margin-bottom:25px; padding:15px; border-radius:8px; border-left:5px solid #ccc;}
+.success{border-left-color: #28a745; background: #f8fff9;}
+.error{border-left-color: #dc3545; background: #fff8f8;}
+.warning{border-left-color: #ffc107; background: #fffdf5;}
+pre{background:#202124; color:#f1f3f4; padding:15px; border-radius:5px; overflow-x:auto; font-size:13px;}
+code{background:#eee; padding:2px 5px; border-radius:3px;}
+</style></head><body>";
 
-// 1. Check Vendor Folder
-echo "<h3>1. Checking Dependencies</h3>";
-if (!file_exists('vendor/autoload.php')) {
-    echo "<p class='error'><strong>CRITICAL ERROR:</strong> The 'vendor' folder is missing!</p>";
-    echo "<p>This is likely because you updated via Git, and Git ignores the folder. You <strong>MUST</strong> run this command in your server terminal:</p>";
-    echo "<pre>composer install</pre>";
-    echo "<p>Or manually upload the 'vendor' folder to your server.</p>";
-} else {
-    echo "<p class='success'>✓ Dependencies (PHPMailer) are installed.</p>";
-    require_once 'vendor/autoload.php';
-}
+echo "<div class='container'>";
+echo "<h1>Bangla Chatbot - Email Support Tool</h1>";
+echo "<p>এই টুলটি আপনার সার্ভারের মেইল প্রসেস ইনভেস্টিগেট করবে।</p>";
 
-// 2. Check Configuration
-echo "<h3>2. SMTP Configuration Check</h3>";
-echo "<ul>";
-echo "<li><strong>Host:</strong> " . SMTP_HOST . "</li>";
-echo "<li><strong>Username:</strong> " . SMTP_USERNAME . "</li>";
-echo "<li><strong>Port:</strong> " . SMTP_PORT . "</li>";
-echo "<li><strong>From Email:</strong> " . SMTP_FROM_EMAIL . "</li>";
-echo "</ul>";
-
-// 3. Test SMTP Connection (External Library test)
+// Step 1: Dependencies
+echo "<div class='step " . (file_exists('vendor/autoload.php') ? "success" : "error") . "'>";
+echo "<h3>১. লাইব্রেরি চেক (Library Check)</h3>";
 if (file_exists('vendor/autoload.php')) {
-    echo "<h3>3. Sending Test Email...</h3>";
+    echo "✓ PHPMailer লাইব্রেরি পাওয়া গেছে।";
+    require_once 'vendor/autoload.php';
+} else {
+    echo "✘ <strong>Error:</strong> 'vendor' ফোল্ডারটি নেই! টার্মিনালে <code>composer install</code> রান করুন অথবা ম্যানুয়ালি আপলোড করুন।";
+}
+echo "</div>";
 
-    require_once 'includes/email_handler.php';
-    $emailHandler = new EmailHandler();
+// Step 2: Connection Test
+echo "<div class='step warning'>";
+echo "<h3>২. কানেকশন টেস্ট (Connection Test)</h3>";
+$host = SMTP_HOST;
+$port = SMTP_PORT;
+echo "Attempting to connect to <strong>$host</strong> on port <strong>$port</strong>...<br>";
 
-    // We'll use a test recipient
-    $testRecipient = 'tanvir.bcb@gmail.com'; // You can change this or keep it
+$connection = @fsockopen($host, $port, $errno, $errstr, 10);
+if ($connection) {
+    echo "<span style='color:green;'>✓ Success:</span> আপনার সার্ভার SMTP হোস্টের সাথে যোগাযোগ করতে পারছে।";
+    fclose($connection);
+} else {
+    echo "<span style='color:red;'>✘ Connection Failed:</span> আপনার সার্ভার থেকে SMTP হোস্টে যোগাযোগ করা যাচ্ছে না।<br>";
+    echo "Error: $errstr ($errno)<br>";
+    echo "<em>সমাধান: আপনার হোস্টিং প্রোভাইডারকে বলুন পোর্ট $port ওপেন করে দিতে। অথবা পোর্ট 465 ট্রাই করুন।</em>";
+}
+echo "</div>";
 
-    echo "<p>Attempting to send a real email to <strong>$testRecipient</strong>...</p>";
+// Step 3: Raw Handshake (The Real Test)
+if (file_exists('vendor/autoload.php')) {
+    echo "<div class='step warning'>";
+    echo "<h3>৩. রিয়েল টাইম লগ (Real-time SMTP Handshake)</h3>";
+    echo "নিচে আপনার সিক্রেট লগ দেখা যাচ্ছে। রেড মার্ক করা লেখাগুলো খেয়াল করুন:<br><br>";
 
-    // Try to send and catch internal PHPMailer errors by instantiating it here for deeper debug
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
     try {
-        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = SMTP_HOST;
         $mail->SMTPAuth = true;
@@ -57,29 +68,29 @@ if (file_exists('vendor/autoload.php')) {
         $mail->SMTPSecure = SMTP_ENCRYPTION;
         $mail->Port = SMTP_PORT;
         $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
-        $mail->addAddress($testRecipient);
+        $mail->addAddress('tanvir.bcb@gmail.com'); // Test address
         $mail->isHTML(true);
-        $mail->Subject = 'Email Debug Test';
-        $mail->Body = 'This is a test email to verify SMTP configuration.';
+        $mail->Subject = 'Debug Report';
+        $mail->Body = 'Testing connectivity info.';
 
-        echo "<p><strong>SMTP Secret Log:</strong> (This will show the raw handshake if it fails)</p>";
-        $mail->SMTPDebug = 2; // Level 2 for full output
+        $mail->SMTPDebug = 3; // Detailed level
         $mail->Debugoutput = function ($str, $level) {
             echo "<pre>$str</pre>";
         };
 
         if ($mail->send()) {
-            echo "<p class='success'><strong>✓ SUCCESS! Email sent successfully.</strong></p>";
+            echo "<p class='success' style='padding:10px;'>✓ চমৎকার! ইমেইল সফলভাবে পাঠানো হয়েছে। আপনার কনফিগারেশন একদম ঠিক আছে।</p>";
         }
     } catch (Exception $e) {
-        echo "<p class='error'><strong>FAILED:</strong> " . $e->getMessage() . "</p>";
-        echo "<p>Common Fixes:</p>";
-        echo "<ul>
-                <li>Check if <strong>SMTP_PASSWORD</strong> is correct.</li>
-                <li>Ensure <strong>" . SMTP_FROM_EMAIL . "</strong> is verified in AWS SES.</li>
-                <li>Check if the SMTP Host region is correct (e.g. ap-south-1 vs ap-southeast-2).</li>
-              </ul>";
+        echo "<p class='error' style='padding:10px;'>✘ মেইল পাঠানো যায়নি। কারণ: " . $e->getMessage() . "</p>";
+
+        if (strpos($e->getMessage(), 'Authentication failed') !== false) {
+            echo "<strong>সম্ভাব্য সমাধান:</strong> আপনার SMTP পাসওয়ার্ড বা ইউজারনেম ভুল।";
+        } elseif (strpos($e->getMessage(), 'MessageRejected') !== false) {
+            echo "<strong>সম্ভাব্য সমাধান:</strong> <code>" . SMTP_FROM_EMAIL . "</code> ইমেইলটি আপনার AWS SES-এ ভেরিফাই করা নেই।";
+        }
     }
+    echo "</div>";
 }
 
 echo "</div></body></html>";
