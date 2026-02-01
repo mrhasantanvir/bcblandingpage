@@ -11,6 +11,7 @@ if (isset($_POST['install'])) {
     $bkash_app_secret = $_POST['bkash_app_secret'];
     $bkash_username = $_POST['bkash_username'];
     $bkash_password = $_POST['bkash_password'];
+    $bkash_url = $_POST['bkash_url'];
     $site_url = rtrim($_POST['site_url'], '/');
 
     $config_content = "<?php
@@ -157,6 +158,13 @@ define('CALLBACK_URL', SITE_URL . '/callback.php');
             <div class="form-group">
                 <label>bKash Password</label>
                 <input type="password" name="bkash_password" required>
+            </div>
+            <div class="form-group">
+                <label>bKash Base URL</label>
+                <input type="text" name="bkash_url" value="https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized/checkout"
+                    required>
+                <small style="font-size: 0.7rem; color: #888;">Live:
+                    https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized/checkout</small>
             </div>
             <button type="submit" name="install">ইন্সটল করুন</button>
         </form>
