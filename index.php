@@ -19,7 +19,7 @@ require_once 'config.php';
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -45,7 +45,7 @@ require_once 'config.php';
 
     <script>
         // Force hide body immediately to prevent flickering (FOUC)
-        document.documentElement.style.backgroundColor = "#030014";
+        document.documentElement.style.backgroundColor = "#f8fafc";
         document.write('<style id="anti-flicker">body{display:none !important;}</style>');
         window.addEventListener('load', () => {
             const style = document.getElementById('anti-flicker');
@@ -59,26 +59,19 @@ require_once 'config.php';
     <style>
         body {
             font-family: 'Outfit', 'Hind Siliguri', sans-serif;
-            background-color: #030014;
-            color: #ffffff;
+            background-color: #f8fafc;
+            color: #0f172a;
             margin: 0;
             overflow-x: hidden;
             transition: opacity 0.8s ease;
         }
 
         :root {
-            --bg-color: #030014;
+            --bg-color: #f8fafc;
             --accent-purple: #7c3aed;
             --accent-blue: #0ea5e9;
-        }
-
-        body {
-            font-family: 'Outfit', 'Hind Siliguri', sans-serif;
-            background-color: #030014;
-            /* Forced dark background */
-            color: #ffffff;
-            margin: 0;
-            overflow-x: hidden;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
         }
 
         /* Ambient Background with Fixed Base Color */
@@ -88,7 +81,8 @@ require_once 'config.php';
             left: 0;
             width: 100%;
             height: 100%;
-            background: #030014;
+            background: #f8fafc;
+            /* Slate-50 */
             z-index: -2;
         }
 
@@ -96,35 +90,36 @@ require_once 'config.php';
             position: absolute;
             width: 80vw;
             height: 80vw;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
             top: -20%;
             left: -10%;
             z-index: -1;
-            filter: blur(60px);
+            filter: blur(80px);
         }
 
         .ambient-glow-2 {
             position: absolute;
             width: 60vw;
             height: 60vw;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
             bottom: -10%;
             right: -10%;
             z-index: -1;
-            filter: blur(60px);
+            filter: blur(80px);
         }
 
         .hero-title {
             line-height: 0.95;
             letter-spacing: -0.04em;
-            background: linear-gradient(to bottom, #ffffff 60%, rgba(255, 255, 255, 0.4) 100%);
+            background: linear-gradient(to bottom, #0f172a 30%, #475569 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .pill-btn {
-            background: #ffffff;
-            color: #000;
+            background: #0f172a;
+            /* Slate-900 */
+            color: #ffffff;
             padding: 16px 36px;
             border-radius: 9999px;
             font-weight: 800;
@@ -132,12 +127,13 @@ require_once 'config.php';
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-flex;
             align-items: center;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
         }
 
         .pill-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
+            background: #1e293b;
         }
 
         /* Orbiting Visualization */
@@ -152,7 +148,8 @@ require_once 'config.php';
 
         .orbit-ring {
             position: absolute;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(15, 23, 42, 0.05);
+            /* Very light slate border */
             border-radius: 50%;
         }
 
@@ -175,14 +172,14 @@ require_once 'config.php';
             position: absolute;
             width: 48px;
             height: 48px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(15, 23, 42, 0.05);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .orbit-1 {
@@ -234,28 +231,34 @@ require_once 'config.php';
 
         /* Glass Form Card */
         .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 40px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 40px 100px rgba(148, 163, 184, 0.2);
+            /* Soft slate shadow */
         }
 
         .input-dark {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
             padding: 18px;
             border-radius: 20px;
             width: 100%;
             transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
         }
 
         .input-dark:focus {
-            background: rgba(255, 255, 255, 0.06);
+            background: #ffffff;
             border-color: var(--accent-purple);
             outline: none;
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        .input-dark::placeholder {
+            color: #94a3b8;
         }
 
         .nav-link {
@@ -263,12 +266,14 @@ require_once 'config.php';
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            opacity: 0.4;
-            transition: opacity 0.3s;
+            color: #475569;
+            opacity: 0.8;
+            transition: all 0.3s;
         }
 
         .nav-link:hover {
             opacity: 1;
+            color: #0f172a;
         }
     </style>
 </head>
@@ -283,33 +288,34 @@ require_once 'config.php';
 
     <!-- Navigation -->
     <nav
-        class="fixed top-0 left-0 w-full z-50 px-8 py-8 md:px-16 flex justify-between items-center transition-all duration-500">
+        class="fixed top-0 left-0 w-full z-50 px-8 py-8 md:px-16 flex justify-between items-center transition-all duration-500 bg-white/50 backdrop-blur-md border-b border-white/20">
         <div class="flex items-center space-x-3">
             <img src="https://app.banglachatbot.com/assets/img/logo.png" alt="Logo" class="h-8">
-            <span class="text-xl font-black tracking-tighter uppercase italic">Bangla<span
-                    class="text-purple-500">Chatbot</span></span>
+            <span class="text-xl font-black tracking-tighter uppercase italic text-slate-900">Bangla<span
+                    class="text-purple-600">Chatbot</span></span>
         </div>
         <div class="flex items-center space-x-8">
-            <a href="https://app.banglachatbot.com/home/login_page"
-                class="nav-link !opacity-60 underline underline-offset-8">Log In</a>
+            <a href="https://app.banglachatbot.com/home/login_page" class="nav-link underline underline-offset-8">Log
+                In</a>
             <button onclick="document.getElementById('buy-now').scrollIntoView({behavior:'smooth'})"
-                class="bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition">Join
+                class="bg-slate-900 text-white px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition shadow-lg shadow-slate-900/10">Join
                 Now</button>
         </div>
     </nav>
 
+    <!-- Hero Content -->
     <!-- Hero Content -->
     <main
         class="relative z-10 pt-48 pb-32 px-8 md:px-16 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-24">
 
         <div class="lg:w-1/2 space-y-12 text-center lg:text-left">
             <div>
-                <h1 class="hero-title text-7xl md:text-[6rem] font-extrabold italic">
+                <h1 class="hero-title text-7xl md:text-[6rem] font-extrabold italic text-slate-900 leading-tight">
                     Simplify Your <br>
                     Service with <br>
                     Bangla Chatbot
                 </h1>
-                <p class="mt-8 text-slate-400 text-xl font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
+                <p class="mt-8 text-slate-600 text-xl font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
                     আপনার ফেসবুক ও মেসেঞ্জার পেইজের কাস্টমারদের রিপ্লাই দিন অটোমেটিকভাবে। স্মার্ট এআই এর মাধ্যমে ব্যবসার
                     গতি বাড়িয়ে নিন বহুগুণ।
                 </p>
@@ -324,7 +330,7 @@ require_once 'config.php';
                 <div class="flex flex-col items-start text-left">
                     <span class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 mb-1">Trusted
                         Partner</span>
-                    <div class="flex items-center space-x-2 text-slate-200 font-bold">
+                    <div class="flex items-center space-x-2 text-slate-900 font-bold">
                         <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
                         <span>500+ Businesses Verified</span>
                     </div>
@@ -340,52 +346,52 @@ require_once 'config.php';
                 <div class="orbit-ring ring-3"></div>
 
                 <div class="center-text">
-                    <h3 class="text-6xl font-black italic">500+</h3>
+                    <h3 class="text-6xl font-black italic text-slate-900">500+</h3>
                     <p class="text-[0.6rem] font-black uppercase tracking-[0.4em] text-slate-500 mt-2">Active
                         Specialists</p>
                 </div>
 
                 <!-- Orbiting Nodes -->
                 <div class="orbit-item orbit-1">
-                    <i class="fa-solid fa-message text-purple-400"></i>
+                    <i class="fa-solid fa-message text-purple-600"></i>
                 </div>
                 <div class="orbit-item orbit-2" style="animation-delay: -5s;">
-                    <i class="fa-solid fa-robot text-blue-400"></i>
+                    <i class="fa-solid fa-robot text-blue-600"></i>
                 </div>
                 <div class="orbit-item orbit-3" style="animation-delay: -15s;">
-                    <i class="fa-solid fa-rocket text-pink-400"></i>
+                    <i class="fa-solid fa-rocket text-pink-600"></i>
                 </div>
                 <div class="orbit-item orbit-2" style="animation-delay: -15s;">
-                    <i class="fa-solid fa-bolt text-yellow-500"></i>
+                    <i class="fa-solid fa-bolt text-yellow-600"></i>
                 </div>
             </div>
         </div>
     </main>
 
     <!-- Partner Logos (Monochrome) -->
-    <div class="py-16 border-y border-white/5 bg-white/0">
-        <div class="max-w-7xl mx-auto px-12 flex flex-wrap justify-between items-center gap-12 opacity-30">
-            <span class="text-2xl font-black tracking-tighter italic">DREAMURE</span>
-            <span class="text-2xl font-black tracking-tighter italic">SWITCH.WIN</span>
-            <span class="text-2xl font-black tracking-tighter italic">GLOWSPHERE</span>
-            <span class="text-2xl font-black tracking-tighter italic">PINSPACE</span>
-            <span class="text-2xl font-black tracking-tighter italic">VISIONIX</span>
+    <div class="py-16 border-y border-slate-200 bg-white/50">
+        <div class="max-w-7xl mx-auto px-12 flex flex-wrap justify-between items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            <span class="text-2xl font-black tracking-tighter italic text-slate-800">DREAMURE</span>
+            <span class="text-2xl font-black tracking-tighter italic text-slate-800">SWITCH.WIN</span>
+            <span class="text-2xl font-black tracking-tighter italic text-slate-800">GLOWSPHERE</span>
+            <span class="text-2xl font-black tracking-tighter italic text-slate-800">PINSPACE</span>
+            <span class="text-2xl font-black tracking-tighter italic text-slate-800">VISIONIX</span>
         </div>
     </div>
 
     <!-- Pricing / Order Section -->
     <section id="buy-now" class="py-40 px-8">
         <div class="max-w-5xl mx-auto">
-            <div class="glass-card p-12 md:p-20 relative overflow-hidden">
+            <div class="glass-card p-12 md:p-20 relative overflow-hidden bg-white/80 border border-white/50 shadow-xl">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-black italic mb-6">আপনার ব্যবসার জন্য স্পেশাল অফার</h2>
+                    <h2 class="text-4xl md:text-5xl font-black italic mb-6 text-slate-900">আপনার ব্যবসার জন্য স্পেশাল অফার</h2>
                     <div class="flex flex-col items-center">
                         <span
-                            class="text-8xl font-black tracking-tighter text-white">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
+                            class="text-8xl font-black tracking-tighter text-slate-900">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
                         <div class="mt-4 flex items-center space-x-4">
-                            <span class="text-slate-500 line-through text-2xl font-bold">৳৫,০০০</span>
+                            <span class="text-slate-400 line-through text-2xl font-bold">৳৫,০০০</span>
                             <span
-                                class="bg-purple-600 px-3 py-1 rounded-md text-xs font-black uppercase tracking-widest">Mega
+                                class="bg-purple-600 px-3 py-1 rounded-md text-white text-xs font-black uppercase tracking-widest shadow-lg shadow-purple-600/30">Mega
                                 Sale</span>
                         </div>
                     </div>
@@ -418,10 +424,10 @@ require_once 'config.php';
 
                     <div class="md:col-span-2 pt-6">
                         <button type="submit"
-                            class="btn-payment w-full bg-white text-black py-6 rounded-3xl font-black text-2xl hover:bg-slate-100 transition shadow-[0_20px_40px_rgba(255,255,255,0.1)]">
+                            class="btn-payment w-full bg-slate-900 text-white py-6 rounded-3xl font-black text-2xl hover:bg-slate-800 transition shadow-xl shadow-slate-900/20 transform hover:-translate-y-1">
                             PAY WITH BKASH
                         </button>
-                        <p class="text-center mt-6 text-[0.6rem] font-black uppercase tracking-[0.4em] text-slate-600">
+                        <p class="text-center mt-6 text-[0.6rem] font-black uppercase tracking-[0.4em] text-slate-400">
                             Secure Payment SSL Encrypted</p>
                     </div>
                 </form>
@@ -430,11 +436,11 @@ require_once 'config.php';
     </section>
 
     <!-- Footer -->
-    <footer class="py-24 border-t border-white/5 text-center">
-        <div class="flex justify-center space-x-10 mb-12 grayscale opacity-40">
+    <footer class="py-24 border-t border-slate-200 text-center bg-slate-50">
+        <div class="flex justify-center space-x-10 mb-12 grayscale opacity-40 hover:opacity-100 transition duration-500">
             <img src="https://app.banglachatbot.com/assets/img/logo.png" class="h-8">
         </div>
-        <p class="text-[0.6rem] font-black uppercase tracking-[0.6em] text-slate-600">
+        <p class="text-[0.6rem] font-black uppercase tracking-[0.6em] text-slate-400">
             &copy; <?php echo date('Y'); ?> Bangla Chatbot. The Future is Automated.
         </p>
     </footer>
