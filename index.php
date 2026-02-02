@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-// Version Control Update
+// Version Control Update: WhatsApp Button Added
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -323,7 +323,7 @@ require_once 'config.php';
                     })
                     .catch(err => console.error('Email check failed', err));
             });
-    }
+        }
     </script>
 
 </body>
