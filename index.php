@@ -48,7 +48,21 @@ require_once 'config.php';
             cursor: not-allowed;
             opacity: 0.6;
         }
+
+        /* Anti-Flicker: Hide body until loaded */
+        body {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out;
+        }
     </style>
+    <script>
+        // Immediately reveal if takes too long (fallback)
+        setTimeout(function () {
+            document.body.style.opacity = '1';
+            document.body.style.visibility = 'visible';
+        }, 3000);
+    </script>
 </head>
 
 <body class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -99,8 +113,7 @@ require_once 'config.php';
             </div>
 
             <!-- Registration Form -->
-            <form id="registrationForm" class="space-y-5" action="process_payment.php" method="POST"
-                onsubmit="event.preventDefault(); openPaymentModal();">
+            <form id="registrationForm" class="space-y-5" action="process_payment.php" method="POST">
 
                 <!-- Name -->
                 <div>
@@ -160,8 +173,11 @@ require_once 'config.php';
                 <div>
                     <button type="submit" id="submitBtn"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-bold text-white gradient-bg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
-                        পেমেন্ট করতে এগিয়ে যান <i class="fa-solid fa-arrow-right ml-2 mt-1"></i>
+                        বিকাশ পেমেন্ট করুন <i class="fa-solid fa-arrow-right ml-2 mt-1"></i>
                     </button>
+                    <p class="text-xs text-center text-gray-400 mt-2">
+                        <i class="fa-solid fa-shield-halved"></i> ১০০% সিকিউর পেমেন্ট
+                    </p>
                 </div>
             </form>
 
@@ -172,57 +188,6 @@ require_once 'config.php';
         </p>
     </div>
 
-    <!-- Payment Modal (Hidden by default) -->
-    <div id="paymentModal"
-        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity hidden z-50 flex items-center justify-center">
-        <div
-            class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-sm w-full mx-4">
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div class="sm:flex sm:items-start">
-                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4 text-center" id="modal-title">
-                            পেমেন্ট মেথড নির্বাচন করুন
-                        </h3>
-                        <div class="mt-2 space-y-3">
-                            <!-- bKash Button -->
-                            <button onclick="processPayment('bkash')"
-                                class="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-pink-50 border-pink-200 group transition">
-                                <span class="font-bold text-gray-700">বিকাশ (bKash)</span>
-                                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-pink-500"></i>
-                            </button>
-
-                            <!-- Nagad Button -->
-                            <button onclick="processPayment('nagad')"
-                                class="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-orange-50 border-orange-200 group transition">
-                                <span class="font-bold text-gray-700">নগদ (Nagad)</span>
-                                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-orange-500"></i>
-                            </button>
-
-                            <!-- Rocket Button -->
-                            <button onclick="processPayment('rocket')"
-                                class="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-purple-50 border-purple-200 group transition">
-                                <span class="font-bold text-gray-700">রকেট (Rocket)</span>
-                                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-purple-500"></i>
-                            </button>
-
-                            <!-- Card Button -->
-                            <button onclick="processPayment('card')"
-                                class="w-full flex items-center justify-between p-3 border rounded-lg hover:bg-blue-50 border-blue-200 group transition">
-                                <span class="font-bold text-gray-700">ডেবিট/ক্রেডিট কার্ড</span>
-                                <i class="fa-regular fa-credit-card text-gray-400 group-hover:text-blue-500"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" onclick="closePaymentModal()"
-                    class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
-                    বন্ধ করুন
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- Logic Script -->
     <script>
