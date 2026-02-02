@@ -159,9 +159,9 @@ require_once 'config.php';
         <div class="text-center mb-6">
             <img class="mx-auto h-16 w-auto" src="https://app.banglachatbot.com/assets/img/logo.png"
                 alt="Bangla Chatbot">
-            <div class="mt-6 transform hover:scale-105 transition duration-300">
-                <h3 class="text-xl md:text-2xl font-bold inline-block neon-text">
-                    🔥 প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন মাত্র ৯৯৯ টাকা 🔥
+            <div class="mt-4">
+                <h3 class="text-xl md:text-2xl font-bold text-red-600 border-2 border-red-200 bg-red-50 rounded-lg p-3 inline-block shadow-sm">
+                    প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন মাত্র ৯৯৯ টাকা
                 </h3>
             </div>
         </div>
