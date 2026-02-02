@@ -1,3 +1,6 @@
+<?php
+require_once 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -27,6 +30,11 @@
         .animate-fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
+        /* Custom disabled style */
+        .cursor-not-allowed {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -55,7 +63,7 @@
             <div class="bg-blue-50 border border-blue-100 rounded-lg p-5 mb-6 text-center">
                 <h3 class="text-lg font-semibold text-blue-800">প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন</h3>
                 <div class="mt-2 flex justify-center items-baseline">
-                    <span class="text-4xl font-extrabold text-blue-600">৳৯৯৯</span>
+                    <span class="text-4xl font-extrabold text-blue-600">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
                     <span class="ml-1 text-xl font-medium text-gray-500 line-through">৳৫০০০</span>
                 </div>
                 <ul class="mt-4 text-sm text-left space-y-2 text-gray-600 px-4">
@@ -66,16 +74,16 @@
             </div>
 
             <!-- Registration Form -->
-            <form class="space-y-5" action="#" method="POST" onsubmit="event.preventDefault(); openPaymentModal();">
+            <form id="registrationForm" class="space-y-5" action="process_payment.php" method="POST" onsubmit="event.preventDefault(); openPaymentModal();">
                 
-                <!-- Username -->
+                <!-- Name -->
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700">ব্যবহারকারীর নাম (Username)</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">ব্যবহারকারীর নাম (Name)</label>
                     <div class="mt-1 relative rounded-md shadow-sm">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <i class="fa-regular fa-user text-gray-400"></i>
                         </div>
-                        <input id="username" name="username" type="text" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border" placeholder="আপনার নাম লিখুন">
+                        <input id="name" name="name" type="text" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border" placeholder="আপনার নাম লিখুন">
                     </div>
                 </div>
 
@@ -87,6 +95,19 @@
                             <i class="fa-regular fa-envelope text-gray-400"></i>
                         </div>
                         <input id="email" name="email" type="email" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border" placeholder="example@mail.com">
+                    </div>
+                    <!-- Email Warning -->
+                    <p id="email-warning" class="text-xs text-red-600 mt-1 hidden"></p>
+                </div>
+
+                <!-- Mobile -->
+                <div>
+                    <label for="mobile" class="block text-sm font-medium text-gray-700">মোবাইল নাম্বার</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-phone text-gray-400"></i>
+                        </div>
+                        <input id="mobile" name="mobile" type="tel" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md p-3 border" placeholder="017XXXXXXXX">
                     </div>
                 </div>
 
@@ -103,13 +124,14 @@
 
                 <!-- Submit Button -->
                 <div>
-                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-bold text-white gradient-bg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                    <button type="submit" id="submitBtn" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-bold text-white gradient-bg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
                         পেমেন্ট করতে এগিয়ে যান <i class="fa-solid fa-arrow-right ml-2 mt-1"></i>
                     </button>
                 </div>
             </form>
 
             <div class="mt-6">
+                 <!-- Payment Partner Icons -->
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center">
                         <div class="w-full border-t border-gray-300"></div>
@@ -121,7 +143,7 @@
                     </div>
                 </div>
                 <div class="mt-4 grid grid-cols-3 gap-3 opacity-60 grayscale hover:grayscale-0 transition duration-300">
-                    <!-- Fake Logo placeholders using text/icons for demo -->
+                     <!-- Styled placeholders -->
                     <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-pink-600 font-bold">bKash</div>
                     <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-orange-600 font-bold">Nagad</div>
                     <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-blue-800 font-bold">VISA</div>
@@ -130,7 +152,7 @@
         </div>
         
         <p class="text-center text-gray-500 text-xs mt-8">
-            &copy; ২০২৫ বাংলা চ্যাটবট। সর্বস্বত্ব সংরক্ষিত।
+            &copy; <?php echo date('Y'); ?> বাংলা চ্যাটবট। সর্বস্বত্ব সংরক্ষিত।
         </p>
     </div>
 
@@ -182,14 +204,20 @@
     <!-- Logic Script -->
     <script>
         function openPaymentModal() {
-            // In a real scenario, you would validate form inputs first
-            const name = document.getElementById('username').value;
+            // Validate inputs first
+            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
             
-            if(name && email) {
+            if(name && email && mobile && password) {
+                // If email check passed (handled by valid check below)
+                if (document.getElementById('submitBtn').disabled) {
+                    return; // Don't open if button disabled
+                }
                 document.getElementById('paymentModal').classList.remove('hidden');
             } else {
-                alert('অনুগ্রহ করে নাম এবং ইমেইল পূরণ করুন।');
+                alert('অনুগ্রহ করে নাম, ইমেইল, মোবাইল এবং পাসওয়ার্ড পূরণ করুন।');
             }
         }
 
@@ -198,12 +226,53 @@
         }
 
         function processPayment(method) {
-            // Here you would redirect to your payment gateway URL
-            // Example: window.location.href = 'https://payment.banglachatbot.com/pay/' + method;
-            alert(method + ' পেমেন্ট গেটওয়েতে রিডাইরেক্ট করা হচ্ছে...');
+            const form = document.getElementById('registrationForm');
             
-            // For Demo Only:
-            closePaymentModal();
+            if(method === 'bkash') {
+                const btn = document.querySelector('button[onclick="processPayment(\'bkash\')"]');
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> প্রসেসিং হচ্ছে...';
+                
+                // Submit main form
+                form.submit();
+            } else {
+                alert('বর্তমানে শুধুমাত্র বিকাশ পেমেন্ট গ্রহণ করা হচ্ছে। অনুগ্রহ করে বিকাশ সিলেক্ট করুন।');
+            }
+        }
+
+        // Email Verification Script
+        const emailInput = document.getElementById('email');
+        const submitBtn = document.getElementById('submitBtn');
+        const warningText = document.getElementById('email-warning');
+
+        if(emailInput) {
+            emailInput.addEventListener('input', function () {
+                const email = this.value;
+                if (email.length < 5 || !email.includes('@')) {
+                    warningText.classList.add('hidden');
+                    warningText.innerText = '';
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('cursor-not-allowed', 'opacity-50');
+                    return;
+                }
+
+                // Debounce could be added here, but direct fetch is simple for now
+                fetch(`check_email.php?email=${encodeURIComponent(email)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'exists') {
+                            submitBtn.disabled = true;
+                            submitBtn.classList.add('cursor-not-allowed', 'opacity-50');
+                            warningText.innerText = data.message;
+                            warningText.classList.remove('hidden');
+                        } else {
+                            submitBtn.disabled = false;
+                            submitBtn.classList.remove('cursor-not-allowed', 'opacity-50');
+                            warningText.classList.add('hidden');
+                            warningText.innerText = '';
+                        }
+                    })
+                    .catch(err => console.error('Email check failed', err));
+            });
         }
     </script>
 
