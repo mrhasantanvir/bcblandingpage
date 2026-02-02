@@ -58,7 +58,7 @@ require_once 'config.php';
     </style>
     <script>
         // Immediately reveal if takes too long (fallback)
-        setTimeout(function () {
+        setTimeout(function  () {
             document.body.style.opacity = '1';
             document.body.style.visibility = 'visible';
         }, 3000);
@@ -99,7 +99,6 @@ require_once 'config.php';
                     <span class="ml-1 text-xl font-medium text-gray-500 line-through">৳৫০০০</span>
                 </div>
                 <ul class="mt-4 text-sm text-left space-y-2 text-gray-600 px-4">
-                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>আনলিমিটেড ফেসবুক পেজ</li>
                     <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>অটো রিপ্লাই ও কমেন্ট মার্কেটিং</li>
                     <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>মেসেঞ্জার শপ ইন্টিগ্রেশন</li>
                     <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>ব্রডকাস্টিং ও সিকোয়েন্স</li>
