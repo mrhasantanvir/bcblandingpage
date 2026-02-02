@@ -153,7 +153,7 @@ require_once 'config.php';
     </script>
 </head>
 
-<body class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<body class="min-h-screen flex flex-col justify-center py-4 sm:px-6 lg:px-8">
 
     <div class="sm:mx-auto sm:w-full sm:max-w-md animate-fade-in">
         <!-- Logo Area -->
