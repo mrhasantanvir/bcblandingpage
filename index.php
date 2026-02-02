@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-// Version Control Update: Demo Video Fix & Bounce Removed (Final)
+// Version Control Update: Aggressive Cache Bust (Text Change)
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -56,7 +56,8 @@ require_once 'config.php';
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css?v=<?php echo time(); ?>">
     <!-- Google Font (Hind Siliguri for Bangla) -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -203,7 +204,7 @@ require_once 'config.php';
                 <button onclick="openVideoModal()"
                     class="bg-red-600 text-white px-6 py-2 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center justify-center mx-auto space-x-2">
                     <i class="fa-solid fa-play-circle text-xl"></i>
-                    <span>ডেমো দেখুন</span>
+                    <span>ভিডিও ডেমো দেখুন</span>
                 </button>
             </div>
 
