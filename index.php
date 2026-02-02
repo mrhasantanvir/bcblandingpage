@@ -198,6 +198,15 @@ require_once 'config.php';
                 </ul>
             </div>
 
+            <!-- Demo Button -->
+            <div class="mb-6 text-center">
+                <button onclick="openVideoModal()"
+                    class="bg-red-600 text-white px-6 py-2 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center justify-center mx-auto space-x-2 animate-bounce">
+                    <i class="fa-solid fa-play-circle text-xl"></i>
+                    <span>ডেমো দেখুন</span>
+                </button>
+            </div>
+
             <!-- Registration Form -->
             <div class="mb-5 text-center bg-yellow-50 p-3 rounded-md border border-yellow-200">
                 <p class="text-gray-800 font-semibold animate-pulse">
@@ -324,6 +333,68 @@ require_once 'config.php';
                     .catch(err => console.error('Email check failed', err));
             });
         }
+    </script>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                onclick="closeVideoModal()"></div>
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal panel -->
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start justify-center">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <div class="aspect-w-16 aspect-h-9 relative" style="padding-bottom: 56.25%;">
+                                <iframe id="youtubeFrame" class="absolute top-0 left-0 w-full h-full rounded-lg" src=""
+                                    title="Demo Video" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        onclick="closeVideoModal()">
+                        বন্ধ করুন
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Video Modal Logic
+        const modal = document.getElementById('videoModal');
+        const frame = document.getElementById('youtubeFrame');
+        const videoId = '8Gp-2hVhYEQ'; // User provided video ID
+
+        function openVideoModal() {
+            modal.classList.remove('hidden');
+            // Auto-play when opened
+            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        }
+
+        function closeVideoModal() {
+            modal.classList.add('hidden');
+            // Stop video by clearing src
+            frame.src = '';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeVideoModal();
+            }
+        });
     </script>
 
 </body>
