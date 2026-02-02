@@ -63,11 +63,15 @@ require_once 'config.php';
         }
     </style>
     <script>
-        // Immediately reveal if takes too long (fallback)
-        setTimeout(function  () {
+        // Reveal immediately after HTML is parsed
+        function revealBody() {
             document.body.style.opacity = '1';
             document.body.style.visibility = 'visible';
-        }, 3000);
+        }
+        document.addEventListener("DOMContentLoaded", revealBody);
+        window.onload = revealBody;
+        // Fallback safety
+        setTimeout(revealBody, 1000); 
     </script>
 </head>
 
@@ -78,12 +82,12 @@ require_once 'config.php';
         <div class="text-center mb-6">
             <img class="mx-auto h-16 w-auto" src="https://app.banglachatbot.com/assets/img/logo.png"
                 alt="Bangla Chatbot">
-            <h2 class="mt-4 text-3xl font-extrabold text-gray-900">
-                অ্যাকাউন্ট তৈরি করুন
-            </h2>
-            <p class="mt-2 text-sm text-gray-600">
-                আপনার ব্যবসার অটোমেশন শুরু হোক এখান থেকেই
-            </p>
+            <div class="mt-4">
+                <h3
+                    class="text-xl md:text-2xl font-extrabold text-red-600 border-2 border-red-500 rounded-lg p-2 inline-block shadow-lg bg-white transform -rotate-1">
+                    প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন মাত্র ৯৯৯ টাকা
+                </h3>
+            </div>
         </div>
 
         <!-- Main Card -->
@@ -98,7 +102,6 @@ require_once 'config.php';
 
             <!-- Package Info Section -->
             <div class="bg-blue-50 border border-blue-100 rounded-lg p-5 mb-6 text-center">
-                <h3 class="text-lg font-semibold text-blue-800">প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন</h3>
                 <div class="mt-2 flex justify-center items-baseline">
                     <span
                         class="text-4xl font-extrabold text-blue-600">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
@@ -118,6 +121,11 @@ require_once 'config.php';
             </div>
 
             <!-- Registration Form -->
+            <div class="mb-5 text-center bg-yellow-50 p-3 rounded-md border border-yellow-200">
+                <p class="text-gray-800 font-semibold animate-pulse">
+                    আপনার একাউন্ট এক্টিভ করতে এখনি পুরন করুন
+                </p>
+            </div>
             <form id="registrationForm" class="space-y-5" action="process_payment.php" method="POST">
 
                 <!-- Name -->
