@@ -37,7 +37,7 @@ require_once 'config.php';
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -93,9 +93,9 @@ require_once 'config.php';
             opacity: 0.6;
         }
 
-        /* Animated Gradient Background */
+        /* Animated Gradient Background (Very Light) */
         body {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(270deg, #eff6ff, #fdf2f8, #f0f9ff, #faf5ff);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             /* Anti-Flicker Hidden State */
@@ -116,6 +116,27 @@ require_once 'config.php';
             100% {
                 background-position: 0% 50%;
             }
+        }
+
+        /* Neon Text Effect */
+        .neon-text {
+            color: #fff;
+            background-color: #000;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #0ea5e9,
+                0 0 30px #0ea5e9,
+                0 0 40px #0ea5e9;
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #0ea5e9,
+                0 0 30px #0ea5e9,
+                0 0 40px #0ea5e9;
         }
     </style>
     <script>
@@ -138,9 +159,8 @@ require_once 'config.php';
         <div class="text-center mb-6">
             <img class="mx-auto h-16 w-auto" src="https://app.banglachatbot.com/assets/img/logo.png"
                 alt="Bangla Chatbot">
-            <div class="mt-4">
-                <h3
-                    class="text-xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-purple-600 border-4 border-yellow-400 rounded-xl p-4 shadow-2xl bg-white transform -rotate-2 animate-bounce">
+            <div class="mt-6 transform hover:scale-105 transition duration-300">
+                <h3 class="text-xl md:text-2xl font-bold inline-block neon-text">
                     🔥 প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন মাত্র ৯৯৯ টাকা 🔥
                 </h3>
             </div>
