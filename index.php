@@ -68,8 +68,11 @@ require_once 'config.php';
                 </div>
                 <ul class="mt-4 text-sm text-left space-y-2 text-gray-600 px-4">
                     <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>আনলিমিটেড ফেসবুক পেজ</li>
-                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>আনলিমিটেড সাবস্ক্রাইবার</li>
-                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>২৪/৭ সাপোর্ট</li>
+                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>অটো রিপ্লাই ও কমেন্ট মার্কেটিং</li>
+                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>মেসেঞ্জার শপ ইন্টিগ্রেশন</li>
+                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>ব্রডকাস্টিং ও সিকোয়েন্স</li>
+                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>লিড জেনারেশন ডাটাবেজ</li>
+                    <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>২৪/৭ প্রায়োরিটি সাপোর্ট</li>
                 </ul>
             </div>
 
@@ -130,25 +133,6 @@ require_once 'config.php';
                 </div>
             </form>
 
-            <div class="mt-6">
-                 <!-- Payment Partner Icons -->
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">
-                            পেমেন্ট পার্টনার
-                        </span>
-                    </div>
-                </div>
-                <div class="mt-4 grid grid-cols-3 gap-3 opacity-60 grayscale hover:grayscale-0 transition duration-300">
-                     <!-- Styled placeholders -->
-                    <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-pink-600 font-bold">bKash</div>
-                    <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-orange-600 font-bold">Nagad</div>
-                    <div class="flex items-center justify-center p-2 border rounded bg-gray-50 text-blue-800 font-bold">VISA</div>
-                </div>
-            </div>
         </div>
         
         <p class="text-center text-gray-500 text-xs mt-8">
