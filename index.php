@@ -75,6 +75,120 @@ require_once 'config.php';
         </div>
     </nav>
 
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-slate-800">কিছু সাধারন প্রশ্ন উত্তর</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">আপনারা কি ফেসবুক অফিসিয়াল API ব্যবহার করেন?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>হ্যাঁ, আমরা ফেসবুকের অফিসিয়াল API ব্যবহার করি, যা সম্পূর্ণ নিরাপদ এবং ফেসবুকের নীতিমালা মেনে চলে।</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">আপনারা কি আমাদের ফেসবুক পেজের মালিকানা পরিবর্তন করেন?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>না, বাংলা চ্যাটবট ব্যবহার করতে হলে আপনার পেজের মালিকানা পরিবর্তন করতে হবে না। পেজের সম্পূর্ণ মালিকানা আপনার কাছেই থাকবে।</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">বাংলা চ্যাটবট কি আমার পেজের তথ্য সংরক্ষণ করে?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>না, বাংলা চ্যাটবট আপনার পেজের কোনো ব্যক্তিগত তথ্য সংরক্ষণ করে না। আমরা শুধুমাত্র আপনার গ্রাহকদের সেবা দেওয়ার জন্য ফেসবুক API এর মাধ্যমে কাজ করি।</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">বাংলা চ্যাটবট কি আমার পেজের নিরাপত্তা বাড়ায়?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>হ্যাঁ, আমাদের চ্যাটবট ফেসবুকের নিরাপত্তা প্রটোকল মেনে চলে এবং পেজের স্বাভাবিক কার্যক্রমে কোনো বাধা সৃষ্টি করে না।</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">বাংলা চ্যাটবট ব্যবহারে ফেসবুক পেজের কোনো ক্ষতি হবে কি?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>না, আমাদের চ্যাটবট ফেসবুকের নিয়ম ও গাইডলাইন মেনে চলে, তাই এটি ব্যবহার করলে আপনার পেজের কোনো ক্ষতি হবে না।</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">আপনাদের চ্যাটবট ব্যবহার করতে কি আমাদের অ্যাডমিন অ্যাক্সেস দিতে হবে?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>না, আমাদের চ্যাটবট সেটআপ করার জন্য শুধুমাত্র "ডেভেলপার" অথবা "এডিটর" অ্যাক্সেসই যথেষ্ট। আপনাকে অ্যাডমিন অ্যাক্সেস দিতে হবে না।</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 7 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">বাংলা চ্যাটবট কি আমার পেজের গ্রাহকদের তথ্য নিরাপদ রাখে?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>হ্যাঁ, আমরা সর্বোচ্চ নিরাপত্তা ব্যবস্থা মেনে কাজ করি। ফেসবুকের অফিসিয়াল API ব্যবহারের কারণে গ্রাহকের তথ্য সর্বদা নিরাপদ থাকে।</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 8 -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
+                    <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none" onclick="toggleFAQ(this)">
+                        <h3 class="text-lg font-bold text-slate-900">আমাদের ফেসবুক পেজে চ্যাটবট ব্যবহারের জন্য অতিরিক্ত কোন নিরাপত্তা ব্যবস্থা নিতে হবে কি?</h3>
+                        <span class="text-slate-500 text-xl font-bold transition-transform duration-300"><i class="fa-solid fa-plus"></i></span>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-slate-600">
+                        <p>না, চ্যাটবট ব্যবহারের জন্য আলাদা কোনো নিরাপত্তা ব্যবস্থা নিতে হবে না। তবে আপনার পেজের সাধারণ নিরাপত্তা নিশ্চিত করতে ফেসবুকের দুই-স্তরের নিরাপত্তা ব্যবস্থা (Two-factor authentication) চালু রাখতে পারেন।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleFAQ(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            content.classList.toggle('hidden');
+            
+            if (content.classList.contains('hidden')) {
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            } else {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            }
+        }
+    </script>
+
     <!-- Hero Section -->
     <section class="pt-16 pb-12 px-6 max-w-7xl mx-auto text-center">
         <div class="max-w-4xl mx-auto space-y-6">
