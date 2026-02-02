@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-// Version Control Update: WhatsApp Spelling Final Fix
+// Version Control Update: Fix Demo Video Modal
 ?>
 <!DOCTYPE html>
 <html lang="bn">
@@ -201,7 +201,7 @@ require_once 'config.php';
             <!-- Demo Button -->
             <div class="mb-6 text-center">
                 <button onclick="openVideoModal()"
-                    class="bg-red-600 text-white px-6 py-2 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center justify-center mx-auto space-x-2 animate-bounce">
+                    class="bg-red-600 text-white px-6 py-2 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center justify-center mx-auto space-x-2">
                     <i class="fa-solid fa-play-circle text-xl"></i>
                     <span>ডেমো দেখুন</span>
                 </button>
@@ -210,7 +210,7 @@ require_once 'config.php';
             <!-- Registration Form -->
             <div class="mb-5 text-center bg-yellow-50 p-3 rounded-md border border-yellow-200">
                 <p class="text-gray-800 font-semibold animate-pulse">
-                    আপনার একাউন্ট এক্টিভ করতে এখনি পুরন করুন
+                    আপনার একাউন্ট রেজিষ্টার করতে এখনি পুরন করুন
                 </p>
             </div>
             <form id="registrationForm" class="space-y-5" action="process_payment.php" method="POST">
@@ -373,20 +373,27 @@ require_once 'config.php';
 
     <script>
         // Video Modal Logic
-        const modal = document.getElementById('videoModal');
-        const frame = document.getElementById('youtubeFrame');
-        const videoId = '8Gp-2hVhYEQ'; // User provided video ID
-
         function openVideoModal() {
-            modal.classList.remove('hidden');
-            // Auto-play when opened
-            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('youtubeFrame');
+            const videoId = '8Gp-2hVhYEQ';
+
+            if (modal && frame) {
+                modal.classList.remove('hidden');
+                frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            } else {
+                console.error('Modal elements not found');
+            }
         }
 
         function closeVideoModal() {
-            modal.classList.add('hidden');
-            // Stop video by clearing src
-            frame.src = '';
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('youtubeFrame');
+
+            if (modal && frame) {
+                modal.classList.add('hidden');
+                frame.src = '';
+            }
         }
 
         // Close on Escape key
