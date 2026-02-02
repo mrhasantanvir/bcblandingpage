@@ -272,6 +272,13 @@ require_once 'config.php';
                 </div>
             </form>
 
+            <div class="mt-6 text-center">
+                <a href="https://wa.link/iauuxn" target="_blank"
+                    class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+                    <i class="fa-brands fa-whatsapp mr-2 text-xl"></i> সরাসরি কথা বলতে চাইলে হোয়াটসঅ্যাপ করুন
+                </a>
+            </div>
+
         </div>
 
         <p class="text-center text-gray-500 text-xs mt-8">
@@ -316,7 +323,7 @@ require_once 'config.php';
                     })
                     .catch(err => console.error('Email check failed', err));
             });
-        }
+    }
     </script>
 
 </body>
