@@ -8,6 +8,12 @@ require_once 'config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>স্পেশাল অফার - বাংলা চ্যাটবট</title>
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -190,42 +196,6 @@ require_once 'config.php';
 
     <!-- Logic Script -->
     <script>
-        function openPaymentModal() {
-            // Validate inputs first
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const mobile = document.getElementById('mobile').value;
-            const password = document.getElementById('password').value;
-
-            if (name && email && mobile && password) {
-                // If email check passed (handled by valid check below)
-                if (document.getElementById('submitBtn').disabled) {
-                    return; // Don't open if button disabled
-                }
-                document.getElementById('paymentModal').classList.remove('hidden');
-            } else {
-                alert('অনুগ্রহ করে নাম, ইমেইল, মোবাইল এবং পাসওয়ার্ড পূরণ করুন।');
-            }
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.add('hidden');
-        }
-
-        function processPayment(method) {
-            const form = document.getElementById('registrationForm');
-
-            if (method === 'bkash') {
-                const btn = document.querySelector('button[onclick="processPayment(\'bkash\')"]');
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> প্রসেসিং হচ্ছে...';
-
-                // Submit main form
-                form.submit();
-            } else {
-                alert('বর্তমানে শুধুমাত্র বিকাশ পেমেন্ট গ্রহণ করা হচ্ছে। অনুগ্রহ করে বিকাশ সিলেক্ট করুন।');
-            }
-        }
-
         // Email Verification Script
         const emailInput = document.getElementById('email');
         const submitBtn = document.getElementById('submitBtn');
