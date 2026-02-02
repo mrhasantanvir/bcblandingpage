@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-// Version Control Update: Fix Demo Video Modal
+// Version Control Update: Demo Video Fix & Bounce Removed (Final)
 ?>
 <!DOCTYPE html>
 <html lang="bn">
