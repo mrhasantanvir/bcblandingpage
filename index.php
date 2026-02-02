@@ -160,7 +160,8 @@ require_once 'config.php';
             <img class="mx-auto h-16 w-auto" src="https://app.banglachatbot.com/assets/img/logo.png"
                 alt="Bangla Chatbot">
             <div class="mt-4">
-                <h3 class="text-xl md:text-2xl font-bold text-red-600 border-2 border-red-200 bg-red-50 rounded-lg p-3 inline-block shadow-sm">
+                <h3
+                    class="text-xl md:text-2xl font-bold text-red-600 border-2 border-red-200 bg-red-50 rounded-lg p-3 inline-block shadow-sm">
                     প্যাকেজ: ১ বছরের মেগা সাবস্ক্রিপশন মাত্র ৯৯৯ টাকা
                 </h3>
             </div>
@@ -181,7 +182,7 @@ require_once 'config.php';
                 <div class="mt-2 flex justify-center items-baseline">
                     <span
                         class="text-4xl font-extrabold text-blue-600">৳<?php echo number_format(OFFER_PRICE, 0); ?></span>
-                    <span class="ml-1 text-xl font-medium text-gray-500 line-through">৳৫০০০</span>
+                    <span class="ml-1 text-xl font-medium text-gray-500 line-through">৳১২০০০</span>
                 </div>
                 <ul class="mt-4 text-sm text-left space-y-2 text-gray-600 px-4">
                     <li><i class="fa-solid fa-check-circle text-green-500 mr-2"></i>অটো রিপ্লাই ও কমেন্ট মার্কেটিং</li>
