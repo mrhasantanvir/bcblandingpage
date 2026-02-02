@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-// Version Control Update: WhatsApp Button Added
+// Version Control Update: WhatsApp Spelling Final Fix
 ?>
 <!DOCTYPE html>
 <html lang="bn">
